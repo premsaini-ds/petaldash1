@@ -198,37 +198,19 @@ function add_postcode_and_delivery_fields() {
         )
     );
 
-    // Delivery Dates Dropdown
-    echo '<p class="form-field delivery_dates_field">';
-    echo '<label for="product_delivery_dates">' . __('Delivery Dates', 'woocommerce') . '</label>';
-    echo '<select id="product_delivery_dates" name="product_delivery_dates[]" multiple class="rounded-full border border-slate-300 w-full px-3" style="height: auto; max-height: 300px;width: 80%;">';
-    
-    $current_date = new DateTime();
-    $num_days = 30;
 
-    // Get saved delivery dates from post meta
-    $saved_delivery_dates = get_post_meta($post->ID, 'product_delivery_dates', true);
-    $saved_delivery_dates = !empty($saved_delivery_dates) ? (array) $saved_delivery_dates : []; // Ensure it's an array
 
-    for ($i = 0; $i <= $num_days; $i++) {
-        $date_value = $current_date->format('Y-m-d');
-        $date_label = $current_date->format('jS M');
+    // Postcode Field
+    woocommerce_wp_text_input( 
+        array( 
+            'id'          => 'delivery_days', 
+            'label'       => __('Delivery Days', 'woocommerce'), 
+            'placeholder' => 'Enter Delivery Days',
+            'desc_tip'    => 'true',
+            'description' => __('Enter the delivery for this product.', 'woocommerce')
+        )
+    );
 
-        if ($i === 0) {
-            $date_label = 'Today';
-        } elseif ($i === 1) {
-            $date_label = 'Tomorrow';
-        }
-
-        // Check if this date is in the saved delivery dates and mark it as selected if it is
-        $selected = in_array($date_value, $saved_delivery_dates) ? 'selected' : '';
-
-        echo '<option value="' . esc_attr($date_value) . '" ' . $selected . '>' . esc_html($date_label) . '</option>';
-        $current_date->modify('+1 day');
-    }
-
-    echo '</select>';
-    echo '</p>';
     echo '</div>';
 }
 add_action('woocommerce_product_options_general_product_data', 'add_postcode_and_delivery_fields');
@@ -241,36 +223,25 @@ function save_postcode_and_delivery_fields($post_id) {
     $postcode = isset($_POST['product_postcode']) ? sanitize_text_field($_POST['product_postcode']) : '';
     update_post_meta($post_id, 'product_postcode', $postcode);
 
-    // Save Delivery Dates
-    if (isset($_POST['product_delivery_dates'])) {
-        $delivery_dates = array_map('sanitize_text_field', $_POST['product_delivery_dates']);
-        update_post_meta($post_id, 'product_delivery_dates', $delivery_dates);
-    } else {
-        delete_post_meta($post_id, 'product_delivery_dates');
-    }
+
+    $delivery_days = isset($_POST['delivery_days']) ? sanitize_text_field($_POST['delivery_days']) : '';
+    update_post_meta($post_id, 'delivery_days', $delivery_days);
+
+    // Save Delivery Days
 }
 add_action('woocommerce_process_product_meta', 'save_postcode_and_delivery_fields');
 
 
 
-// Display postcode and delivery dates on the product page
+// Display postcode and delivery Days on the product page
 function display_postcode_and_delivery_fields($post) {
     // Retrieve and display Postcode
     $postcode = get_post_meta($post->ID, 'product_postcode', true);
     echo '<p><strong>' . __('Postcode', 'woocommerce') . ':</strong> ' . esc_html($postcode) . '</p>';
 
-    // Retrieve and display Delivery Dates
-    $delivery_dates = get_post_meta($post->ID, 'product_delivery_dates', true);
-    if (!empty($delivery_dates)) {
-        echo '<p><strong>' . __('Delivery Dates', 'woocommerce') . ':</strong></p>';
-        echo '<ul>';
-        foreach ($delivery_dates as $date) {
-            echo '<li>' . esc_html($date) . '</li>';
-        }
-        echo '</ul>';
-    } else {
-        echo '<p>' . __('No delivery dates selected.', 'woocommerce') . '</p>';
-    }
+    // Retrieve and display Delivery Days
+      $delivery_days = get_post_meta($post->ID, 'delivery_days', true);
+     echo '<p><strong>' . __('Delivery Days', 'woocommerce') . ':</strong> ' . esc_html($delivery_days) . '</p>';
 }
 add_action('woocommerce_admin_product_data_after_tabs', 'display_postcode_and_delivery_fields');
 
@@ -278,8 +249,10 @@ add_action('woocommerce_admin_product_data_after_tabs', 'display_postcode_and_de
 
 
 
-function filter_products_by_postcode_and_delivery_date($query) {
-    if (!is_admin() && $query->is_main_query() && is_shop()) {
+function filter_products_by_postcode_and_delivery_days($query) {
+
+    if (!is_admin() && $query->is_main_query() && is_shop() || is_product_category()) {
+
         // Filter by postcode
         if (isset($_GET['postcode']) && !empty($_GET['postcode'])) {
             $postcode = sanitize_text_field($_GET['postcode']);
@@ -296,58 +269,68 @@ function filter_products_by_postcode_and_delivery_date($query) {
         }
 
         // Filter by delivery date
-        if (isset($_GET['delivery_date']) && !empty($_GET['delivery_date'])) {
-            $delivery_date = sanitize_text_field($_GET['delivery_date']);
-            
-            // Adding delivery date to the meta query
+
+        if (isset($_GET['delivery_date']) && !empty($_GET['delivery_date']) && $_GET['delivery_date'] !='anytime') {
+
+             // Sanitize and get the delivery date from the query parameter
+                $delivery_date = sanitize_text_field($_GET['delivery_date']);
+
+                // Create a DateTime object for the delivery date
+                $deliveryDate = new DateTime($delivery_date);
+
+
+             // Get the current date
+                $currentDate = new DateTime();
+
+                // Calculate the difference
+                 $interval = $currentDate->diff($deliveryDate);
+
+                // Get the number of days
+                 $daysBetween = $interval->days+1;
+                
+                // echo $daysBetween;die;
+
             $delivery_meta_query = array(
                 array(
-                    'key'     => 'product_delivery_dates', // This should match your post meta key
-                    'value'   => $delivery_date,
+                    'key'     => 'delivery_days',
+                    'value'   => $daysBetween,
                     'compare' => 'LIKE',
                 ),
             );
 
-            // If there is an existing meta query for postcode, merge with the delivery date query
-            if (!empty($query->get('meta_query'))) {
-                $meta_query = $query->get('meta_query');
-                $meta_query = array_merge($meta_query, $delivery_meta_query);
-            } else {
-                $meta_query = $delivery_meta_query;
-            }
-
-            $query->set('meta_query', $meta_query);
+            $query->set('meta_query', $delivery_meta_query);
         }
+      
     }
 }
-add_action('pre_get_posts', 'filter_products_by_postcode_and_delivery_date');
+add_action('pre_get_posts', 'filter_products_by_postcode_and_delivery_days');
 
 
 
 
 
-/*capture_delivery_date*/
+/*capture_delivery_days*/
 
-function capture_delivery_date() {
+function capture_delivery_days() {
     if (isset($_GET['delivery_date']) && !empty($_GET['delivery_date'])) {
         // Sanitize and store delivery dates as a comma-separated string
-        $delivery_dates = sanitize_text_field($_GET['delivery_date']);
-        WC()->session->set('delivery_dates', $delivery_dates);
+        $delivery_days = sanitize_text_field($_GET['delivery_date']);
+        WC()->session->set('delivery_days', $delivery_days);
     }
 }
-add_action('wp', 'capture_delivery_date');
+add_action('wp', 'capture_delivery_days');
 
 
-/*add_delivery_date_to_checkout*/
+/*add_delivery_days_to_checkout*/
 
-function add_delivery_date_to_checkout($fields) {
-    $delivery_dates = WC()->session->get('delivery_dates'); // Fetching the session value
-    if ($delivery_dates) {
-        $fields['billing']['delivery_dates'] = array(
+function add_delivery_days_to_checkout($fields) {
+    $delivery_days = WC()->session->get('delivery_days'); // Fetching the session value
+    if ($delivery_days) {
+        $fields['billing']['delivery_days'] = array(
             'type' => 'textarea', // Use textarea for multiple dates
-            'label' => __('Delivery Dates', 'woocommerce'),
-            'placeholder' => __('Enter dates separated by commas'),
-            'default' => $delivery_dates,
+            'label' => __('Delivery Days', 'woocommerce'),
+            'placeholder' => __('Enter days separated by commas'),
+            'default' => $delivery_days,
             'required' => true,
             'class' => array('form-row-wide'),
             'clear' => true,
@@ -355,34 +338,34 @@ function add_delivery_date_to_checkout($fields) {
     }
     return $fields;
 }
-add_filter('woocommerce_checkout_fields', 'add_delivery_date_to_checkout');
+add_filter('woocommerce_checkout_fields', 'add_delivery_days_to_checkout');
 
-/*save_delivery_date_order_meta*/
+/*save_delivery_days_order_meta*/
 
 
-// Add delivery dates to order meta
-function save_delivery_date_order_meta($order_id) {
-    // Retrieve the delivery dates from the session
-    if ($delivery_dates = WC()->session->get('delivery_dates')) {
-        // Assuming delivery_dates is an array of selected dates
-        $delivery_dates_string = is_array($delivery_dates) ? implode(', ', $delivery_dates) : sanitize_text_field($delivery_dates);
+// Add delivery days to order meta
+function save_delivery_days_order_meta($order_id) {
+    // Retrieve the delivery days from the session
+    if ($delivery_days = WC()->session->get('delivery_days')) {
+        // Assuming delivery_days is an array of selected days
+        $delivery_days_string = is_array($delivery_days) ? implode(', ', $delivery_days) : sanitize_text_field($delivery_days);
         
         // Save to order meta
-        update_post_meta($order_id, 'Delivery Dates', $delivery_dates_string);
+        update_post_meta($order_id, 'Delivery Days', $delivery_days_string);
     }
 }
 add_action('woocommerce_checkout_update_order_meta', 'save_delivery_date_order_meta');
 
 
-// Display delivery dates in order admin panel
-function display_delivery_date_in_admin_order($order) {
-    $delivery_dates = get_post_meta($order->get_id(), 'Delivery Dates', true);
+// Display delivery days in order admin panel
+function display_delivery_days_in_admin_order($order) {
+    $delivery_days = get_post_meta($order->get_id(), 'Delivery Days', true);
     
-    if ($delivery_dates) {
-        echo '<p><strong>' . __('Delivery Dates:', 'woocommerce') . '</strong> ' . esc_html($delivery_dates) . '</p>';
+    if ($delivery_days) {
+        echo '<p><strong>' . __('Delivery Days:', 'woocommerce') . '</strong> ' . esc_html($delivery_days) . '</p>';
     }
 }
-add_action('woocommerce_admin_order_data_after_order_details', 'display_delivery_date_in_admin_order');
+add_action('woocommerce_admin_order_data_after_order_details', 'display_delivery_days_in_admin_order');
 
 
 
@@ -417,7 +400,14 @@ function postcode_delivery_filter_form() {
                         $date_label = 'Tomorrow';
                     }
 
-                    echo '<option value="' . esc_attr($date) . '">' . esc_html($date_label) . '</option>'; // Output the date label
+                    $selected = "";
+
+                   // Check if the 'delivery_date' parameter is set and matches the date
+                $selected = (isset($_GET['delivery_date']) && $_GET['delivery_date'] == $date) ? 'selected' : '';
+
+                // Output the option for the select element
+                echo '<option value="' . esc_attr($date) . '" ' . $selected . '>' . esc_html($date_label) . '</option>';
+
                 }
                 ?>
             </select>
