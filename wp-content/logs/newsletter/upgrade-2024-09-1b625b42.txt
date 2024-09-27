@@ -1,0 +1,38 @@
+19-09-2024 11:24:47 - INFO  - 8.5.0 - 19.3 MB/4 GB - pdAdm > Start upgrade from 0.0.0
+19-09-2024 11:24:47 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_emails`] => Created table `pd_newsletter_emails`
+)
+
+19-09-2024 11:24:47 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_sent`] => Created table `pd_newsletter_sent`
+)
+
+19-09-2024 11:24:47 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter`] => Created table `pd_newsletter`
+)
+
+19-09-2024 11:24:48 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_user_logs`] => Created table `pd_newsletter_user_logs`
+)
+
+19-09-2024 11:24:50 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_user_meta`] => Created table `pd_newsletter_user_meta`
+)
+
+19-09-2024 11:24:54 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_stats`] => Created table `pd_newsletter_stats`
+)
+
+19-09-2024 11:24:56 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Array
+(
+    [`pd_newsletter_logs`] => Created table `pd_newsletter_logs`
+)
+
+19-09-2024 11:24:57 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > Backing up options of 0.0.0
+19-09-2024 11:24:58 - INFO  - 8.5.0 - 19.1 MB/4 GB - pdAdm > End

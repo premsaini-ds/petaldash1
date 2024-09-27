@@ -1,0 +1,449 @@
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-Bold.woff2') format('woff2'),
+        url('fonts/Prompt-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-Light.woff2') format('woff2'),
+        url('fonts/Prompt-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-Black.woff2') format('woff2'),
+        url('fonts/Prompt-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-Regular.woff2') format('woff2'),
+        url('fonts/Prompt-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-SemiBold.woff2') format('woff2'),
+        url('fonts/Prompt-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('fonts/Prompt-Medium.woff2') format('woff2'),
+        url('fonts/Prompt-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Medium.woff2') format('woff2'),
+        url('fonts/Roboto-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Regular.woff2') format('woff2'),
+        url('fonts/Roboto-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Medium.woff2') format('woff2'),
+        url('fonts/Roboto-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Bold.woff2') format('woff2'),
+        url('fonts/Roboto-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-Regular.woff2') format('woff2'),
+        url('fonts/Montserrat-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+h1{ font-size: 48px; color:#1A1A1A;font-family: 'Prompt';}
+h2{font-family: 'Prompt'; font-size: 38px; color:#1A1A1A;}
+h3{font-family: 'Prompt'; font-size: 24px; color:#1A1A1A;}
+
+.margin-top{ margin-top: 60px;}
+
+body:not(.custom-background-image).admin-bar:before{
+    top: 30;
+    display: none;
+}
+
+body:not(.custom-background-image):before{
+     top: 30px;
+      display: none;
+}
+body:not(.custom-background-image):after{
+            bottom: unset;
+}
+.site-content{
+    padding: unset;
+}
+.site{margin: 0}
+ul.woocommerce_list {
+    display: flex;
+    align-items: center;    
+    gap: 5px;
+}
+
+.woocommerce_list li {
+      list-style: none;
+}
+
+.woocommerce_list li a{
+       color: unset;
+    text-decoration: none;
+}
+.woocommerce_list li a i {
+    margin-right: 5px;
+}
+
+.site-inner{margin:0;    max-width: 100%;}
+
+
+
+
+/*header css*/
+.top_header {background: #1E1C1B;color: #fff; padding: 2px 15px;}
+.top_header .row {align-items: center;}
+.topcall{display: flex;align-items: center;}
+.topcall span {margin: 0 8px 0 0px;}
+.topcall a {color: #fff;text-decoration: none;font-family: 'Prompt';}
+.top_header .top-heading p {margin: 0;font-family: 'Montserrat';font-weight: normal;font-size: 14px; text-align: center;}
+
+.top_header .social-icons {gap: 0;display: block;}
+.top_header .social-icons ul {margin: 0;float: right;}
+.top_header .social-icons ul li {display: inline-block;margin: 0 10px 0 0;}
+.top_header .social-icons ul li a {color: #fff; font-size: 18px;transition: color 0.3s ease;}
+.social-icons li a:hover {color: #007bff; }
+
+
+.site-header-main {padding: 0 30px;}
+.site-header-main .site-header-menu {margin: 0;}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu {padding: 0;}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li {font-size: 15px;font-weight: normal;color: #000000;font-family: 'Prompt';margin: 0 25px 0 0px;}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li a{font-size: 15px;font-weight: normal;color: #000000;text-decoration: none; padding: 0;}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li a:hover{ color: #eb615c;}
+
+
+.site-header-main .site-branding {margin: auto;padding: 0;width: 170px;}
+.site-header-main .site-branding a.custom-logo-link {width: 100%;}
+.site-header-main .site-branding a.custom-logo-link img.custom-logo {width: 100%;}
+.site-header-main .site-branding p {display: none;}
+.site-header-main .woocommerce_header_menu ul.woocommerce_list {margin: 0;}
+
+.site-header-main .woocommerce_header_menu ul.woocommerce_list li {margin: 0 0 0 25px;}
+.site-header-main .woocommerce_header_menu ul.woocommerce_list li a {font-size: 15px;color: #000;font-family: 'Prompt';}
+/*header css end*/
+
+
+
+/*Home page flower section main */
+.flower-delivery-section {background-color: #f0d8d8;padding: 90px 0;background-repeat: no-repeat;background-size: cover; height: 767px; position: relative;}
+.flower-delivery-section .img-fluid {max-width: 100%;height: auto;}
+.postcode-form input[type="text"] {border-radius: 0;}
+.postcode-form .btn-primary {background-color: #ff6f61;border-color: #ff6f61;}
+.rating-box {background-color: #fff;padding: 10px;border-radius: 5px;}
+.rating-box i {color: #ffcc00;font-size: 20px}
+
+.flower-delivery-section h4 {margin-top: 20px;font-size: 18px;color: #333;}
+.flower-delivery-section .flower-delivery-section-content {max-width: 680px;margin: auto;position: absolute;top: 50%;transform: translate(-50%, -50%);left: 50%;}
+.flower-delivery-section .flower-delivery-section-content h1 {text-align: center;}
+.flower-delivery-section .flower-delivery-section-content h2 {font-size: 35px;font-weight: normal;text-align: center; padding: 0 40px;}
+.flower-delivery-section .flower-delivery-section-content form.postcode-form {position: relative; overflow: hidden; border-radius: 10px; margin-bottom: 15px !important;}
+.flower-delivery-section .flower-delivery-section-content form.postcode-form input {max-width: 233px;height: 60px;padding: 0 40px 0 50px;border: none; font-size: 15px; appearance: none;}
+
+.flower-delivery-section .flower-delivery-section-content form.postcode-form span.home-search {position: absolute;left: 0;background: #FFF0F0;height: 60px;width: 60px;display: flex;
+align-items: center;justify-content: center;}
+.flower-delivery-section .flower-delivery-section-content form.postcode-form select {border: none;padding: 0 0 0 50px;max-width: 233px;height: 60px;}
+.flower-delivery-section .flower-delivery-section-content form.postcode-form span.home-date {position: absolute;right: 382px;background: #FFF0F0;height: 60px;width: 60px;display: flex;
+align-items: center;justify-content: center;}
+.flower-delivery-section .flower-delivery-section-content form.postcode-form button.btn {background: #C6342A;width: 165px;border: none;border-radius: 0 10px 10px 0;font-size: 15px;text-transform: uppercase;
+font-weight: bold;font-family: 'Roboto';}
+.flower-delivery-section .flower-delivery-section-content .rating-box {text-align: center;margin: auto;display: table !important;float: none; padding: 7px 15px 4px;}
+.flower-delivery-section .flower-delivery-section-content .rating-box span {margin: 0 0 0 12px;color: #000;font-weight: bold;font-family: 'Roboto';}
+/*sustainability section on the home page */
+
+/*most popular css*/
+.most-popular .carousel button {width: 50px;height: 50px;background: #E8E8E8;top: 50%;transform: translate(0, -50%);border-radius: 50px;opacity: 1;transition: all 0.5s ease; }
+.most-popular .carousel button:hover{background: #f2817d; transition: all 0.5s ease;}
+.most-popular .carousel button.carousel-control-prev {left: -26px;}
+.most-popular .carousel button.carousel-control-next {right: -26px;}
+.most-popular .carousel button.carousel-control-prev span.carousel-control-prev-icon {background: url(/wp-content/themes/petaldash/images/arrow-black.png) no-repeat;width: 11px;height: 20px;transform: rotate(-180deg);}
+.most-popular .carousel button.carousel-control-next span.carousel-control-next-icon{background: url(/wp-content/themes/petaldash/images/arrow-black.png) no-repeat;width: 11px;height: 20px;}
+
+.most-popular .card{ border: none;}
+.most-popular .card .card-body{ border: none; padding: 16px 15px;}
+.most-popular .card a {height: 300px;}
+.most-popular .card a img{ height: 100%; object-fit: cover;}
+.most-popular .card .card-body h5.card-title, .most-popular .card .card-body span.star-rating {font-size: 15px;font-weight: normal;font-family: 'Roboto';text-transform: uppercase;}
+.most-popular .card .card-body p.card-text {font-size: 15px;font-family: 'Prompt'; color: #000; text-align: left; margin: 0;}
+.most-popular .card .card-body p bdi {font-size: 18px;font-weight: bold;}
+/*most popular css end*/
+
+
+/*sustainability css*/
+.sustainability-section {background-color: #faf7f0;padding: 60px 0;}
+.sustainability-section h2 {width: 100%;margin: 0 0 40px;}.sustainability-section .sustainability-box span {display: inline-block;height: 85px;width: 85px;}
+.sustainability-section .sustainability-box h4 {font-size: 18px;line-height: 25px;margin: 15px 0 0;padding: 0 44px;}
+.sustainability-section .icon {font-size: 40px;color: #f2817d;}
+/*sustainability css end*/
+
+/*best selling css*/
+.best-selling .card {background: #F8F8F8; height: 100%;}
+/*best selling css end*/
+
+
+
+/*gift subscription section on home page*/
+
+.gift-subscription-section {padding: 60px 0;background-color: #fff6f8; position: relative; height: 679px; }
+.gift-subscription-section.margin-top:after {position: absolute;content: '';background: url(/wp-content/themes/petaldash/images/yellow-flower.png) no-repeat;top: -141px;right: 40px;width: 122px;height: 152px;}
+
+.gift-subscription-section .column-heading {ont-size: 38px;text-align: left;color: #333;margin-bottom: 40px;padding: 0 90px 0 0px;}
+.gift-subscription-section .icon {font-size: 36px;color: #f2817d; /* Theme color */}
+.gift-subscription-section .subscription-box h3 {line-height: 32px;}
+.gift-subscription-section .box-description {font-size: 16px;color: #555;margin-bottom: 15px;}
+.gift-subscription-section .subscription-box .btn {background-color: #f2817d;border: none;color: #fff;padding: 10px 20px;border-radius: 5px;font-size: 16px;}
+.gift-subscription-section .subscription-box {background: #fff;padding: 30px;border-radius: 11px;}
+.gift-subscription-section .subscription-box span {display: inline-block;margin: 0 0 20px;}
+
+.gift-subscription-section .gift-subscription-right {position: absolute;top: 0;right: 0;width: 40%; height: 100%;}
+.gift-subscription-section .gift-subscription-right img {margin: 0;width: 100%;object-fit: cover; height: 100%;}
+
+
+
+.dose-of-love-section {background-size: cover;background-position: center;color: #fff;position: relative;padding: 60px 0;display: flex;width: 100%; height: 625px;align-items: center;}
+.dose-of-love-section .dose-of-love-section-contant {width: 50%;float: right;}
+.dose-of-love-section h2 {font-size: 47px;line-height: 50px;font-weight: bold;margin-bottom: 10px;color: #fff;}
+.dose-of-love-section .dose-description {font-size:15px;margin-bottom: 30px; line-height: 24px;}
+.dose-of-love-section .dose-btn {background-color: #f2817d;border: none;padding: 12px 30px;font-size: 1rem;font-weight: bold;border-radius: 5px;transition: background-color 0.3s ease;}
+.dose-of-love-section .dose-btn:hover {background-color: #d96864;}
+/*gift subscription section on home page*/
+
+/*footer css*/
+footer.site-footer { padding: 0;width: 100%;margin: auto 0;display: block; position: relative;}
+.footer-widgets {background: #1e1c1b;color: #fff;padding: 40px 0; position: relative;}
+.gift-img.up-down {position: absolute;content: '';top: -141px;right: 40px;width: 254px;height: 160px; z-index: 9;  animation: up-down linear 4s;
+animation-iteration-count: infinite;transform-origin: 50% 50%;-webkit-animation: up-down linear 4s;-webkit-animation-iteration-count: infinite;-webkit-transform-origin: 50% 50%;-moz-animation: up-down linear 4s;
+-moz-animation-iteration-count: infinite;-moz-transform-origin: 50% 50%;-o-animation: up-down linear 4s;-o-animation-iteration-count: infinite;-o-transform-origin: 50% 50%;-ms-animation: up-down linear 4s;-ms-animation-iteration-count: infinite;
+-ms-transform-origin: 50% 50%;}
+.footer-widgets .footer-widget h3 {color: #fff;font-size: 22px;font-weight: bold; margin: 0 0 15px;}
+.footer-widgets .footer-widget.footer-widget-1 {padding: 0;}
+.footer-widgets .footer-widget.footer-widget-4 {padding: 0;}
+.footer-widgets .footer-widget {padding: 0 52px 0;}
+.footer-widgets .footer-widget ul {padding: 0; margin: 0;}
+.footer-widgets .footer-widget.footer-widget-1 ul li{padding: 0 0 0 26px;}
+.footer-widgets .footer-widget ul li {list-style: none; margin: 0 0 15px;font-size: 15px; position: relative;padding: 0 0 0 15px;}
+.footer-widgets .footer-widget ul li:before {content: '';font-family: 'FontAwesome';position: absolute;left: 0;font-size: 18px;}
+.footer-widgets .footer-widget.footer-widget-1 ul li:before {display: none;}
+.footer-widgets .footer-widget ul li i.fa {position: absolute;left: 0;top: 5px;}
+.footer-widgets-second {width: 100%;background: #02000f;    padding: 15px 0;}
+.footer-widgets-second span.site-title {color: #fff;}
+.footer-widgets-second span.site-title a {font-weight: bold;color: #fff;text-decoration: none;}
+.footer-widgets .footer-widget ul li a {color: #fff;text-decoration: none;font-size: 15px;}
+
+.footer-widgets .footer-widget .tnp-subscription form {position: relative;display: flex;justify-content: space-between;background: #fff; border-radius: 50px;}
+.footer-widgets .footer-widget .tnp-subscription form .tnp-field-email {color: #DADADA;font-size: 12px; margin: 0;}
+.footer-widgets .footer-widget .tnp-subscription form .tnp-field-email input {background: #fff;font-size: 12px;height: 100%;border-radius: 50px;padding: 13px 15px;}
+.footer-widgets .footer-widget .tnp-subscription form .tnp-field-button {margin: 0;}
+.footer-widgets .footer-widget .tnp-subscription form .tnp-field-button input.tnp-submit {background: #F2817D;border-radius: 50px;font-size: 12px;height: 100%;padding: 0 18px;font-weight: normal;}
+.footer-widgets .footer-widget.footer-widget-4 ul.wp-block-social-links li:before {display: none;}
+.footer-widgets .footer-widget.footer-widget-4 ul.wp-block-social-links li {background: #fff;width: 38px;height: 38px;display: flex;align-items: center;justify-content: center;}
+.footer-widgets .footer-widget.footer-widget-4 ul.wp-block-social-links li:hover{transform: scale(1);}
+.footer-widgets .footer-widget.footer-widget-4 ul.wp-block-social-links a svg {width: 23px;height: 22px;fill: black;}
+
+@keyframes up-down{
+0% {transform:  translate(1px,20px)  ;}
+24% {transform:  translate(1px,30px)  ;}
+50% {transform:  translate(1px,12px)  ;}
+74% {transform:  translate(1px,22px)  ;}
+100% {transform:  translate(1px,22px)  ;}
+}
+
+@-moz-keyframes up-down{
+0% {-moz-transform:  translate(1px,20px)  ;}
+24% {-moz-transform:  translate(1px,30px)  ;}
+50% {-moz-transform:  translate(1px,12px)  ;}
+74% {-moz-transform:  translate(1px,22px)  ;}
+100% {-moz-transform:  translate(1px,22px)  ;}
+}
+
+@-webkit-keyframes up-down {
+0% {-webkit-transform:  translate(1px,20px)  ;}
+24% {-webkit-transform:  translate(1px,30px)  ;}
+50% {-webkit-transform:  translate(1px,12px)  ;}
+74% {-webkit-transform:  translate(1px,22px)  ;}
+100% {-webkit-transform:  translate(1px,22px)  ;}
+}
+
+@-o-keyframes up-down {
+0% {-o-transform:  translate(1px,20px)  ;}
+24% {-o-transform:  translate(1px,30px)  ;}
+50% {-o-transform:  translate(1px,12px)  ;}
+74% {-o-transform:  translate(1px,22px)  ;}
+100% {-o-transform:  translate(1px,22px)  ;}
+}
+
+@-ms-keyframes up-down {
+0% {-ms-transform:  translate(1px,20px)  ;}
+24% {-ms-transform:  translate(1px,30px)  ;}
+50% {-ms-transform:  translate(1px,12px)  ;}
+74% {-ms-transform:  translate(1px,22px)  ;}
+100% {-ms-transform:  translate(1px,22px)  ;}
+}
+/*footer css end*/
+
+@media (max-width: 1199px) {
+/*header css*/
+.site-header-main{ display: block;}
+.site-header-main .header-navigation {
+    position: absolute;
+}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li{margin: 0 15px 0 0px;}
+.site-header-main .woocommerce_header_menu ul.woocommerce_list li{margin: 0 0 0 15px;}
+/*header css end*/
+}
+
+@media (max-width:991px) {
+.top_header{ padding: 10px 15px;}
+
+    .topcall a{ font-size: 10px;}
+    .top_header .top-heading p{ font-size: 10px;}
+    .site-header-main .site-branding{ width: 140px;}
+    .site-header-main .woocommerce_header_menu ul.woocommerce_list li{margin: 0 0 0 8px;}
+    .site-header-main .woocommerce_header_menu ul.woocommerce_list li a{ font-size: 13px;}
+    .site-header-main .header-navigation .site-header-menu nav .primary-menu li{margin: 0 8px 0 0px;}
+    .site-header-main .header-navigation .site-header-menu nav .primary-menu li a{ font-size: 13px;}  
+}
+
+@media (max-width: 767px) {
+/*header css*/
+.site-header-main .header-navigation .menu-toggle {font-size: 0;border: none;position: relative;background: #000;width: 30px;height: 1px;left: 0;}
+.site-header-main .header-navigation .menu-toggle:before {width: 30px;display: inline-block;content: '';height: 1px;position: absolute;background: #000;left: 0;top: 7px;}
+.site-header-main .header-navigation .menu-toggle:after {width: 30px;display: inline-block;content: '';height: 1px;position: absolute;background: #000;top: 14px;left: 0;}
+.site-header-main .header-navigation .site-header-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: #000;
+    z-index: 9;
+    width: 270px;
+}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li{margin: 0 8px 0 0px;}
+.site-header-main .header-navigation .site-header-menu nav .primary-menu li a {
+    font-size: 13px;
+    color: #fff;
+    padding: 11px 19px;
+    font-size: 15px;
+}
+.top_header .col-md-4 {width: 33%;}
+/*header css end*/
+}
+
+@media (max-width: 575px) {
+/*header css*/
+.topcall{ justify-content: center;}
+.top_header .top-heading p {font-size: 14px;margin: 6px 0;}
+.top_header .social-icons ul {margin: 0;float: none;padding: 0;text-align: center;}
+.top_header .col-md-4 {width:575px;}
+/*header css end*/
+}
+
+
+@media (max-width: 768px) {
+    .sustainability-section .grid-heading {
+        font-size: 16px;
+    }
+    .sustainability-section .icon {
+        font-size: 30px;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .gift-subscription-section .full-width {
+        height: auto;
+    }
+    .gift-subscription-section .column-heading {
+        font-size: 24px;
+    }
+    .gift-subscription-section .box-heading {
+        font-size: 18px;
+    }
+}
+
+
+/*Dose of love section*/
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .dose-of-love-section .col-md-6 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .dose-of-love-section .dose-heading {
+        font-size: 2rem;
+    }
+    .dose-of-love-section .dose-description {
+        font-size: 1rem;
+    }
+}
+
+
+
+.single-product.woocommerce div.product .summary.entry-summary {
+    margin: 0;
+}
+
+.single-product main#main {
+    width: 100%;
+    padding-right: var(--bs-gutter-x, 15px);
+    padding-left: var(--bs-gutter-x, 15px);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+

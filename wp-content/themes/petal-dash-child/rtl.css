@@ -1,0 +1,9 @@
+/*
+Theme Name:     Petal Dash Child
+Template:       petaldash
+
+This is the child theme for Petal Dash theme, generated with Generate Child Theme plugin by catchthemes.
+
+Right to Left text support.
+*/
+@import url("../petaldash/rtl.css");

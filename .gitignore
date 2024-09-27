@@ -1,0 +1,12 @@
+# WordPress Core
+/wp-admin/
+/wp-includes/
+
+# Local files
+wp-config.php
+*.log
+*.sqlite
+
+# OS generated files
+.DS_Store
+Thumbs.db
