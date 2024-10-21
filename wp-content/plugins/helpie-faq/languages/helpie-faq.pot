@@ -1,0 +1,482 @@
+#. Dashboard FAQ Menu and CPT FAQs Section
+
+msgid "FAQ"
+msgstr "FAQ" 
+
+msgid "FAQs"
+msgstr "FAQs" 
+
+msgid "All FAQs"
+msgstr "All FAQs" 
+
+msgid "Show Title"
+msgstr "Show Title"
+
+msgid "Helpie FAQ"
+msgstr "Helpie FAQ"
+
+msgid "Select FAQ Title Tag"
+msgstr "Select FAQ Title Tag"
+
+msgid "Add New FAQ"
+msgstr "Add New FAQ" 
+
+msgid "Add New"
+msgstr "Add New" 
+
+msgid "New FAQ"
+msgstr "New FAQ" 
+
+msgid "Edit FAQ"
+msgstr "Edit FAQ" 
+
+msgid "Add FAQ"
+msgstr "Add FAQ" 
+
+msgid "Hide"
+msgstr "Hide" 
+
+msgid "View FAQ"
+msgstr "View FAQ" 
+
+msgid "FAQ Category"
+msgstr "FAQ Category" 
+
+msgid "Categories"
+msgstr "Categories" 
+
+msgid "KB Categories"
+msgstr "KB Categories" 
+
+msgid "Woo Products"
+msgstr "Woo Products" 
+
+msgid "All FAQ Categories"
+msgstr "All FAQ Categories" 
+
+msgid "FAQ Categories"
+msgstr "FAQ Categories" 
+
+msgid "FAQ Tag"
+msgstr "FAQ Tag" 
+
+msgid "Tags"
+msgstr "Tags" 
+
+msgid "All FAQ Tags"
+msgstr "All FAQ Tags" 
+
+msgid "FAQ Tags"
+msgstr "FAQ Tags" 
+
+msgid "FAQ Settings"
+msgstr "FAQ Settings" 
+
+#. General Tab
+
+msgid "General"
+msgstr "General" 
+
+msgid "Title"
+msgstr "Title" 
+
+msgid "FAQ Title"
+msgstr "FAQ Title" 
+
+msgid "Show Search"
+msgstr "Show Search" 
+
+msgid "Show Search in FAQ"
+msgstr "Show Search in FAQ" 
+
+msgid "No FAQ found"
+msgstr "No FAQ found" 
+
+msgid "You can search through all FAQ items"
+msgstr "You can search through all FAQ items" 
+
+msgid "No FAQ found"
+msgstr "No FAQ found" 
+
+msgid "Search Placeholder"
+msgstr "Search Placeholder" 
+
+msgid "Search Placeholder text"
+msgstr "Search Placeholder text" 
+
+msgid "FAQ Search Placeholder text"
+msgstr "FAQ Search Placeholder text" 
+
+msgid "Search FAQ"
+msgstr "Search FAQ"
+
+msgid "Search By Tags"
+msgstr "Search By Tags"
+
+msgid "Toggle"
+msgstr "Toggle" 
+
+msgid "Toggle Open / closed Previous Item"
+msgstr "Toggle Open / closed Previous Item" 
+
+msgid "FAQ Open By Default"
+msgstr "FAQ Open By Default"
+
+msgid "None"
+msgstr "None"
+
+msgid "Open First FAQ"
+msgstr "Open First FAQ"
+
+msgid "Add FAQ Url Attribute"
+msgstr "Add FAQ Url Attribute"
+
+msgid "Faq item added in url"
+msgstr "Faq item added in url"
+
+msgid "Display Mode"
+msgstr "Display Mode"
+
+msgid "Simple Accordion"
+msgstr "Simple Accordion"
+
+msgid "Simple Accordion by Category"
+msgstr "Simple Accordion by Category"
+
+msgid "Category Accordion"
+msgstr "Category Accordion"
+
+msgid "FAQ List"
+msgstr "FAQ List"
+
+msgid "Open First FAQ Item"
+msgstr "Open First FAQ Item" 
+
+msgid "First item open by default"
+msgstr "First item open by default" 
+
+msgid "Sort By"
+msgstr "Sort By" 
+
+msgid "Publish Date"
+msgstr "Publish Date" 
+
+msgid "Updated Date"
+msgstr "Updated Date" 
+
+msgid "Alphabetical"
+msgstr "Alphabetical" 
+
+msgid "Order"
+msgstr "Order" 
+
+msgid "Ascending"
+msgstr "Ascending" 
+
+msgid "Descending"
+msgstr "Descending" 
+
+msgid "Limit"
+msgstr "Limit" 
+
+msgid "Limit ( number of items )"
+msgstr "Limit ( number of items )" 
+
+msgid "Limit of the FAQ items"
+msgstr "Limit of the FAQ items" 
+
+msgid "Enable wpautop"
+msgstr "Enable wpautop"
+
+msgid "Enable / Disable wpautop"
+msgstr "Enable / Disable wpautop"
+
+msgid "FAQs Shows Products Only"
+msgstr "FAQs Shows Products Only"
+
+msgid "True / False"
+msgstr "True / False"
+
+msgid "Exclude FAQ posts from WordPress Search"
+msgstr "Exclude FAQ posts from WordPress Search"
+
+msgid "Helpie FAQ Slug"
+msgstr "Helpie FAQ Slug"
+
+msgid "Menu Order"
+msgstr "Menu Order"
+
+#. Style Tab
+
+msgid "Style"
+msgstr "Style" 
+
+msgid "Theme"
+msgstr "Theme" 
+
+msgid "Light"
+msgstr "Light" 
+
+msgid "Dark"
+msgstr "Dark" 
+
+msgid "Select Theme of FAQ Layout Section"
+msgstr "Select Theme of FAQ Layout Section"
+
+msgid "Custom Styles will overwrite theme styles"
+msgstr "Custom Styles will overwrite theme styles"
+
+msgid "Toggle Icons"
+msgstr "Toggle Icons"
+
+msgid "Toggle Icon"
+msgstr "Toggle Icon"
+
+msgid "Default"
+msgstr "Default"
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "Toggle Icons are not shown for FAQ List display mode"
+msgstr "Toggle Icons are not shown for FAQ List display mode"
+
+msgid "Toggle Open"
+msgstr "Toggle Open"
+
+msgid "Toggle Off"
+msgstr "Toggle Off"
+
+msgid "Icon Color"
+msgstr "Icon Color"
+
+msgid "Icon Position"
+msgstr "Icon Position"
+
+msgid "Left"
+msgstr "Left"
+
+msgid "FAQ Section - Title"
+msgstr "FAQ Section - Title"
+
+msgid "Title Styles"
+msgstr "Title Styles"
+
+msgid "FAQ Title & Body Styles"
+msgstr "FAQ Title & Body Styles"
+
+msgid "FAQ Backgrounds"
+msgstr "FAQ Backgrounds"
+
+msgid "Title Background"
+msgstr "Title Background"
+
+msgid "Body Background"
+msgstr "Body Background"
+
+msgid "If you would like to show the FAQs without backgrounds, set the background value as transparent"
+msgstr "If you would like to show the FAQs without backgrounds, set the background value as transparent"
+
+msgid "FAQ Item - Title"
+msgstr "FAQ Item - Title"
+
+msgid "FAQ Item - Title Padding"
+msgstr "FAQ Item - Title Padding"
+
+msgid "FAQ Item - Body"
+msgstr "FAQ Item - Body"
+
+msgid "FAQ Item - Body Content Padding"
+msgstr "FAQ Item - Body Content Padding"
+
+msgid "FAQ Border"
+msgstr "FAQ Border"
+
+msgid "Category FAQ Styles"
+msgstr "Category FAQ Styles"
+
+msgid "Category Style are shown only for Simple Accordion with Category or FAQ list display mode"
+msgstr "Category Style are shown only for Simple Accordion with Category or FAQ list display mode"
+
+msgid "Category Style"
+msgstr "Category Style"
+
+msgid "Search Styles"
+msgstr "Search Styles"
+
+msgid "Search Style are shown only when the search is enabled"
+msgstr "Search Style are shown only when the search is enabled"
+
+msgid "Background Color"
+msgstr "Background Color"
+
+msgid "Font Color"
+msgstr "Font Color"
+
+#. User Submission Tab
+msgid "Submission"
+msgstr "Submission"
+
+msgid "Enable / Disable User Submission form in FAQ"
+msgstr "Enable / Disable User Submission form in FAQ"
+
+msgid "Ask Question With"
+msgstr "Ask Question With"
+
+msgid "On Submission"
+msgstr "On Submission"
+
+msgid "Dont Require Approval"
+msgstr "Dont Require Approval"
+
+msgid "Require Approval"
+msgstr "Require Approval"
+
+msgid "Approval Before Showing"
+msgstr "Approval Before Showing"
+
+msgid "Once Approved, Submitter will be notified through email"
+msgstr "Once Approved, Submitter will be notified through email"
+
+msgid "Submitter Notification"
+msgstr "Submitter Notification"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Subject title"
+msgstr "Subject title"
+
+msgid "The FAQ you submitted has been approved"
+msgstr "The FAQ you submitted has been approved"
+
+msgid "A new FAQ you had submitted has been approved by the admin"
+msgstr "A new FAQ you had submitted has been approved by the admin"
+
+msgid "Notify Admin"
+msgstr "Notify Admin"
+
+msgid "Admin Mail"
+msgstr "Admin Mail"
+
+#. Integrations Tab
+
+msgid "Integrations"
+msgstr "Integrations" 
+
+#. KB Tab
+msgid "In order use this feature you need to purchase and activate the %s plugin"
+msgstr "In order use this feature you need to purchase and activate the %s plugin"
+
+msgid "Enable FAQ in Helpie KB"
+msgstr "Enable FAQ in Helpie KB" 
+
+msgid "Show FAQ In Helpie KB Category Page"
+msgstr "Show FAQ In Helpie KB Category Page" 
+
+msgid "Where to Show FAQ in Helpie KB Category Page"
+msgstr "Where to Show FAQ in Helpie KB Category Page" 
+
+msgid "Content"
+msgstr "Content" 
+
+msgid "Before Content"
+msgstr "Before Content" 
+
+msgid "After Content"
+msgstr "After Content" 
+
+msgid "Select show faq before or after content in kb category page"
+msgstr "Select show faq before or after content in kb category page" 
+
+#. WooCommerce Tab
+
+msgid "Show FAQ in WooCommerce"
+msgstr "Show FAQ in WooCommerce" 
+
+msgid "Show FAQ In WooCommerce product tab"
+msgstr "Show FAQ In WooCommerce product tab" 
+
+msgid "Show FAQ Search"
+msgstr "Show FAQ Search"
+
+msgid "Show FAQ Search In WooCommerce product"
+msgstr "Show FAQ Search In WooCommerce product"
+
+msgid "Tab Title"
+msgstr "Tab Title" 
+
+msgid "In your site not found product categories, please add some categories for better customization of Product FAQ Relations"
+msgstr "In your site not found product categories, please add some categories for better customization of Product FAQ Relations"
+
+msgid "Product Faq Relations"
+msgstr "Product Faq Relations"
+
+msgid "Product FAQ Relations"
+msgstr "Product FAQ Relations"
+
+msgid "Link this Category to"
+msgstr "Link this Category to"
+
+msgid "All Woo Categories"
+msgstr "All Woo Categories"
+
+msgid "Specific Woo Categories"
+msgstr "Specific Woo Categories"
+
+msgid "Product of Woo Commerce Categories"
+msgstr "Product of Woo Commerce Categories"
+
+#.Elementor Widget
+
+msgid "Single Item"
+msgstr "Single Item" 
+
+msgid "Single Item - Header"
+msgstr "Single Item - Header" 
+
+msgid "Single Item - Body"
+msgstr "Single Item - Body" 
+
+#. Roadmap
+
+msgid "Roadmap"
+msgstr "Roadmap"
+
+msgid "here"
+msgstr "here"
+
+msgid "You can vote on Helpie FAQ's next feature %s"
+msgstr "You can vote on Helpie FAQ's next feature %s"
+
+#. Frondend
+msgid "No FAQ found"
+msgstr "No FAQ found"
+
+msgid "Question ? ( required )"
+msgstr "Question ? ( required )"
+
+msgid "Your Email ( required )"
+msgstr "Your Email ( required )"
+
+msgid "Answer"
+msgstr "Answer"
+
+msgid "Submit"
+msgstr "Submit"
+
+# Pagination
+msgid "Next"
+msgstr "Next"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Page"
+msgstr "Page"
+
+msgid "First"
+msgstr "First"
+
+msgid "Last"
+msgstr "Last"

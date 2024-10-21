@@ -1,0 +1,459 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Helpie FAQ\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-20 08:22+0000\n"
+"PO-Revision-Date: 2024-09-27 17:39+0530\n"
+"Last-Translator: admin <s@g.com>\n"
+"Language-Team: German\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.4.4\n"
+
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "FAQs"
+msgstr "FAQs"
+
+msgid "All FAQs"
+msgstr "Alle FAQs"
+
+msgid "Show Title"
+msgstr "Titel anzeigen"
+
+msgid "Select FAQ Title Tag"
+msgstr "Wählen Sie FAQ Title Tag"
+
+msgid "Add New FAQ"
+msgstr "Neue FAQ hinzufügen"
+
+msgid "Add New"
+msgstr "Neue hinzufügen"
+
+msgid "New FAQ"
+msgstr "Neue FAQ"
+
+msgid "Edit FAQ"
+msgstr "FAQ bearbeiten"
+
+msgid "Add FAQ"
+msgstr "FAQ hinzufügen"
+
+msgid "Hide"
+msgstr "Ausblenden"
+
+msgid "View FAQ"
+msgstr "Siehe FAQ"
+
+msgid "FAQ Category"
+msgstr "FAQ-Kategorie"
+
+msgid "Categories"
+msgstr "Kategorien"
+
+msgid "KB Categories"
+msgstr "KB-Kategorien"
+
+msgid "All FAQ Categories"
+msgstr "Alle FAQ Kategorien"
+
+msgid "FAQ Categories"
+msgstr "FAQ Kategorien"
+
+msgid "FAQ Tag"
+msgstr "FAQ-Tag"
+
+msgid "Tags"
+msgstr "Stichworte"
+
+msgid "All FAQ Tags"
+msgstr "Alle FAQ-Tags"
+
+msgid "FAQ Tags"
+msgstr "Häufig gestellte Fragen"
+
+msgid "FAQ Settings"
+msgstr "FAQ Einstellungen"
+
+#. General Tab
+msgid "General"
+msgstr "Allgemeines"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "FAQ Title"
+msgstr "FAQ Titel"
+
+msgid "Show Search"
+msgstr "Suche anzeigen"
+
+msgid "Show Search in FAQ"
+msgstr "Zeige Suche in FAQ"
+
+msgid "You can search through all FAQ items"
+msgstr "Sie können alle FAQ-Elemente durchsuchen"
+
+msgid "Search Placeholder"
+msgstr "Platzhalter suchen"
+
+msgid "Search Placeholder text"
+msgstr "Platzhaltertext suchen"
+
+msgid "FAQ Search Placeholder text"
+msgstr "FAQ Suchen Platzhaltertext"
+
+msgid "Search FAQ"
+msgstr "FAQ suchen"
+
+msgid "Search By Tags"
+msgstr "Suche nach Tags"
+
+msgid "Toggle"
+msgstr "Umschalten"
+
+msgid "Toggle Open / closed Previous Item"
+msgstr "Toggle Öffnen / Schließen Vorheriges Element"
+
+msgid "FAQ Open By Default"
+msgstr "FAQ Standardmäßig geöffnet"
+
+msgid "None"
+msgstr "Keiner"
+
+msgid "Open First FAQ"
+msgstr "Öffnen Sie die ersten FAQ"
+
+msgid "Add FAQ Url Attribute"
+msgstr "FAQ-URL-Attribut hinzufügen"
+
+msgid "Faq item added in url"
+msgstr "FAQ-Artikel in URL hinzugefügt"
+
+msgid "Display Mode"
+msgstr "Anzeigemodus"
+
+msgid "Simple Accordion"
+msgstr "Einfaches Akkordeon"
+
+msgid "Simple Accordion by Category"
+msgstr "Einfaches Akkordeon nach Kategorie"
+
+msgid "Category Accordion"
+msgstr "Kategorie Akkordeon"
+
+msgid "FAQ List"
+msgstr "FAQ-Liste"
+
+msgid "Open First FAQ Item"
+msgstr "Öffnen Sie das erste FAQ-Element"
+
+msgid "First item open by default"
+msgstr "Der erste Artikel ist standardmäßig geöffnet"
+
+msgid "Sort By"
+msgstr "Sortiere nach"
+
+msgid "Publish Date"
+msgstr "Datum der Veröffentlichung"
+
+msgid "Updated Date"
+msgstr "Neues Datum"
+
+msgid "Alphabetical"
+msgstr "Alphabetisch"
+
+msgid "Order"
+msgstr "Auftrag"
+
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+msgid "Descending"
+msgstr "Absteigend"
+
+msgid "Limit"
+msgstr "Grenze"
+
+msgid "Limit ( number of items )"
+msgstr "Grenze ( Anzahl der Teile )"
+
+msgid "Limit of the FAQ items"
+msgstr "Limit der FAQ-Einträge"
+
+msgid "Enable wpautop"
+msgstr "Aktivieren Sie wpautop"
+
+msgid "Enable / Disable wpautop"
+msgstr "Aktivieren / Deaktivieren von wpautop"
+
+msgid "FAQs Shows Products Only"
+msgstr "In den häufig gestellten Fragen werden nur Produkte angezeigt"
+
+msgid "True / False"
+msgstr "Wahr falsch"
+
+msgid "Exclude FAQ posts from WordPress Search"
+msgstr "FAQ-Beiträge von der WordPress-Suche ausschließen"
+
+msgid "Menu Order"
+msgstr "Menüreihenfolge"
+
+#. Style Tab
+msgid "Style"
+msgstr "Stil"
+
+msgid "Theme"
+msgstr "Thema"
+
+msgid "Light"
+msgstr "Licht"
+
+msgid "Dark"
+msgstr "Dunkel"
+
+msgid "Select Theme of FAQ Layout Section"
+msgstr "Wählen Sie Thema des FAQ-Layoutbereichs"
+
+msgid "Custom Styles will overwrite theme styles"
+msgstr "Benutzerdefinierte Stile überschreiben Themenstile"
+
+msgid "Toggle Icons"
+msgstr "Symbole umschalten"
+
+msgid "Toggle Icon"
+msgstr "Symbol umschalten"
+
+msgid "Default"
+msgstr "Standard"
+
+msgid "Custom"
+msgstr "Benutzerdefiniert"
+
+msgid "Toggle Icons are not shown for FAQ List display mode"
+msgstr "Umschalt-Symbole werden für den Anzeigemodus der FAQ-Liste nicht angezeigt"
+
+msgid "Toggle Open"
+msgstr "Öffnen umschalten"
+
+msgid "Toggle Off"
+msgstr "Ausschalten"
+
+msgid "Icon Color"
+msgstr "Symbolfarbe"
+
+msgid "Icon Position"
+msgstr "Symbolposition"
+
+msgid "Left"
+msgstr "Links"
+
+msgid "FAQ Section - Title"
+msgstr "FAQ-Bereich - Titel"
+
+msgid "Title Styles"
+msgstr "Titelstile"
+
+msgid "FAQ Backgrounds"
+msgstr "FAQ Hintergründe"
+
+msgid "Title Background"
+msgstr "Titel Hintergrund"
+
+msgid "FAQ Item - Title"
+msgstr "FAQ Item - Titel"
+
+msgid "Body Background"
+msgstr "Körperhintergrund"
+
+msgid "If you would like to show the FAQs without backgrounds, set the background value as transparent"
+msgstr "Wenn Sie die FAQs ohne Hintergrund anzeigen möchten, legen Sie den Hintergrundwert als transparent fest"
+
+msgid "FAQ Item - Title Padding"
+msgstr "FAQ Item - Titelauffüllung"
+
+msgid "FAQ Border"
+msgstr "FAQ Rand"
+
+msgid "Category FAQ Styles"
+msgstr "Kategorie FAQ Stile"
+
+msgid "Category Style are shown only for Simple Accordion with Category or FAQ list display mode"
+msgstr "Der Kategoriestil wird nur für die einfache Akkordeon mit dem Anzeigemodus \"Kategorie\" oder \"FAQ-Liste\" angezeigt"
+
+msgid "Category Style"
+msgstr "Kategoriestil"
+
+msgid "Search Styles"
+msgstr "Suchstile"
+
+msgid "Search Style are shown only when the search is enabled"
+msgstr "Der Suchstil wird nur angezeigt, wenn die Suche aktiviert ist"
+
+msgid "Background Color"
+msgstr "Hintergrundfarbe"
+
+msgid "Font Color"
+msgstr "Schriftfarbe"
+
+#. User Submission Tab
+msgid "Submission"
+msgstr "Einreichung"
+
+msgid "Enable / Disable User Submission form in FAQ"
+msgstr "Aktivieren / Deaktivieren des Benutzerübermittlungsformulars in den FAQ"
+
+msgid "Ask Question With"
+msgstr "Frage stellen mit"
+
+msgid "On Submission"
+msgstr "Bei Einreichung"
+
+msgid "Dont Require Approval"
+msgstr "Keine Genehmigung erforderlich"
+
+msgid "Require Approval"
+msgstr "Genehmigung erforderlich"
+
+msgid "Approval Before Showing"
+msgstr "Genehmigung vor dem Anzeigen"
+
+msgid "Once Approved, Submitter will be notified through email"
+msgstr "Nach der Genehmigung wird der Einsender per E-Mail benachrichtigt"
+
+msgid "Submitter Notification"
+msgstr "Benachrichtigung des Absenders"
+
+msgid "Subject"
+msgstr "Gegenstand"
+
+msgid "Subject title"
+msgstr "Betreff-Titel"
+
+msgid "The FAQ you submitted has been approved"
+msgstr "Die von Ihnen eingereichten FAQ wurden genehmigt"
+
+msgid "A new FAQ you had submitted has been approved by the admin"
+msgstr "Eine neue FAQ, die Sie eingereicht haben, wurde vom Administrator genehmigt"
+
+msgid "Notify Admin"
+msgstr "Benachrichtigen Sie den Administrator"
+
+#. Integrations Tab
+msgid "Integrations"
+msgstr "Integrationen"
+
+#. KB Tab
+msgid "In order use this feature you need to purchase and activate the %s plugin"
+msgstr "Um diese Funktion nutzen zu können, müssen Sie die kaufen und aktivieren %s plugin"
+
+msgid "Enable FAQ in Helpie KB"
+msgstr "Aktivieren Sie FAQ in der Hilfe-KB"
+
+msgid "Show FAQ In Helpie KB Category Page"
+msgstr "Zeige FAQ in der Helpie KB Kategorieseite"
+
+msgid "Where to Show FAQ in Helpie KB Category Page"
+msgstr "Wo man FAQ in der Hilfekategorie-Seite zeigt"
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Before Content"
+msgstr "Vor dem Inhalt"
+
+msgid "After Content"
+msgstr "Nach dem Inhalt"
+
+msgid "Select show faq before or after content in kb category page"
+msgstr "Wählen Sie \"faq\" vor oder nach dem Inhalt auf der kb-Kategorieseite"
+
+#. WooCommerce Tab
+msgid "Show FAQ in WooCommerce"
+msgstr "Zeige FAQ in WooCommerce"
+
+msgid "Show FAQ In WooCommerce product tab"
+msgstr "Zeige FAQ auf der WooCommerce-Produktseite"
+
+msgid "Show FAQ Search"
+msgstr "FAQ-Suche anzeigen"
+
+msgid "Show FAQ Search In WooCommerce product"
+msgstr "FAQ-Suche im WooCommerce-Produkt anzeigen"
+
+msgid "Tab Title"
+msgstr "Registerkarte Titel"
+
+msgid "In your site not found product categories, please add some categories for better customization of Product FAQ Relations."
+msgstr "Fügen Sie auf Ihrer Website nicht gefundene Produktkategorien einige Kategorien hinzu, um die häufig gestellten Fragen zu Produkt-FAQs besser anpassen zu können."
+
+msgid "Product Faq Relations"
+msgstr "Produkt-FAQ-Beziehungen"
+
+msgid "Product FAQ Relations"
+msgstr "Produkt-FAQ-Beziehungen"
+
+msgid "Link this Category to"
+msgstr "Verknüpfen Sie diese Kategorie mit"
+
+msgid "All Woo Categories"
+msgstr "Alle Woo-Kategorien"
+
+msgid "Specific Woo Categories"
+msgstr "Spezifische Woo-Kategorien"
+
+msgid "Product of Woo Commerce Categories"
+msgstr "Produkt der Woo Commerce-Kategorien"
+
+#. Elementor Widget
+msgid "Single Item"
+msgstr "Einzelexemplar"
+
+msgid "Single Item - Header"
+msgstr "Einzelartikel - Kopfzeile"
+
+msgid "Single Item - Body"
+msgstr "Einzelstück - Körper"
+
+#. Roadmap
+msgid "here"
+msgstr "Hier"
+
+msgid "You can vote on Helpie FAQ's next feature %s"
+msgstr "Sie können über die nächste Funktion von Helpie FAQ abstimmen %s"
+
+#. Frondend
+msgid "No FAQ found"
+msgstr "Keine FAQ gefunden"
+
+msgid "Question ? ( required )"
+msgstr "Frage? (erforderlich)"
+
+msgid "Your Email ( required )"
+msgstr "Ihre E-Mailadresse (erforderlich )"
+
+msgid "Answer"
+msgstr "Antworten"
+
+msgid "Submit"
+msgstr "Einreichen"
+
+# PAGINATION
+msgid "Next"
+msgstr "Nächste"
+
+msgid "Previous"
+msgstr "Vorherige"
+
+msgid "Page"
+msgstr "Seite"
+
+msgid "First"
+msgstr "Erste"
+
+msgid "Last"
+msgstr "Letzte"

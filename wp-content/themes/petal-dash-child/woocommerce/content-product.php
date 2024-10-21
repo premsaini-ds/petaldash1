@@ -20,56 +20,14 @@ defined( 'ABSPATH' ) || exit;
 global $product;
 
 // Ensure visibility.
-if ( empty( $product ) || ! $product->is_visible() ) {
+if ( empty( $product ) || ! $product->is_visible() || $product->is_type('gift-card')) {
 	return;
 }
 ?>
-<!-- <li <?php //wc_product_class( '', $product ); ?>>
-	<?php
-	/**
-	 * Hook: woocommerce_before_shop_loop_item.
-	 *
-	 * @hooked woocommerce_template_loop_product_link_open - 10
-	 */
-	//do_action( 'woocommerce_before_shop_loop_item' );
 
-	/**
-	 * Hook: woocommerce_before_shop_loop_item_title.
-	 *
-	 * @hooked woocommerce_show_product_loop_sale_flash - 10
-	 * @hooked woocommerce_template_loop_product_thumbnail - 10
-	 */
-	//do_action( 'woocommerce_before_shop_loop_item_title' );
-
-	/**
-	 * Hook: woocommerce_shop_loop_item_title.
-	 *
-	 * @hooked woocommerce_template_loop_product_title - 10
-	 */
-	//do_action( 'woocommerce_shop_loop_item_title' );
-
-	/**
-	 * Hook: woocommerce_after_shop_loop_item_title.
-	 *
-	 * @hooked woocommerce_template_loop_rating - 5
-	 * @hooked woocommerce_template_loop_price - 10
-	 */
-	//do_action( 'woocommerce_after_shop_loop_item_title' );
-
-	/**
-	 * Hook: woocommerce_after_shop_loop_item.
-	 *
-	 * @hooked woocommerce_template_loop_product_link_close - 5
-	 * @hooked woocommerce_template_loop_add_to_cart - 10
-	 */
-	// do_action( 'woocommerce_after_shop_loop_item' );
-	?>
-</li>
- -->
-
-<li <?php wc_product_class('', $product); ?>>
+ <li <?php wc_product_class('', $product); ?>>
     <div class="card text-center">
-        <a href="<?php the_permalink(); ?>" class="product-hover">
+        <a href="#" class="product-hover" data-bs-toggle="modal" data-bs-target="#productModal-<?php echo $product->get_id(); ?>">
             <?php
             // Get product images
             $attachment_ids = $product->get_gallery_image_ids();
@@ -80,7 +38,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             echo '<img src="' . esc_url($first_image) . '" class="img-fluid card-img-top product-image" alt="' . esc_attr(get_the_title()) . '">';
 
             // Display second image for hover effect
-            echo '<img src="' . esc_url($second_image) . '" class="img-fluid card-img-top product-image-hover" alt="' . esc_attr(get_the_title()) . '" >';
+            echo '<img src="' . esc_url($second_image) . '" class="img-fluid card-img-top product-image-hover" alt="' . esc_attr(get_the_title()) . '">';
             ?>
         </a>
         <div class="card-body">
@@ -90,9 +48,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
                     <?php
                     // Get average rating
                     $average_rating = $product->get_average_rating();
-                    // Format the rating to one decimal place
                     $average_rating = number_format($average_rating, 1);
-                    // Display star icon with average rating
                     echo '<i class="fa fa-star"></i> ' . esc_html($average_rating);
                     ?>
                 </span>
@@ -101,35 +57,110 @@ if ( empty( $product ) || ! $product->is_visible() ) {
             <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
         </div>
     </div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="productModal-<?php echo $product->get_id(); ?>" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- <h5 class="modal-title" id="productModalLabel"><?php the_title(); ?></h5> -->
+                     <h5 class="modal-title">Let us know where you're sending to: </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                    // Fetch the product postcode(s) stored in meta
+                    $saved_postcode = get_post_meta($product->get_id(), 'product_postcode', true); // Assuming saved as a string
+
+                    if (!empty($saved_postcode)) {
+                        $saved_postcode = esc_js($saved_postcode); // Escape for use in JS
+                    }
+
+
+
+                      // Get the delivery options from WooCommerce settings
+                    $delivery_options = get_option('custom_delivery_options_data');
+                    $delivery_options = array_filter(array_map('trim', explode("\n", $delivery_options))); // Split and clean data
+                    $delivery_after_days = get_post_meta($product->get_id(), 'delivery_after_days', true);
+
+
+
+                    ?>
+                    <form id="productForm-<?php echo $product->get_id(); ?>" action="<?php echo esc_url(get_permalink($product->get_id())); ?>" method="GET">
+                        <div class="mb-3">
+                            <label for="postcode-<?php echo $product->get_id(); ?>" class="form-label">Postcode <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="postcode-<?php echo $product->get_id(); ?>" name="postcode" required>
+                            <small id="postcode-error-<?php echo $product->get_id(); ?>" class="text-danger" style="display:none;">Invalid Postcode</small>
+                        </div>
+                        <div class="mb-3">
+                            <label for="delivery-date-<?php echo $product->get_id(); ?>" class="form-label">Delivery Date (Optional)</label>
+                            <select class="form-control" id="delivery-date-<?php echo $product->get_id(); ?>" name="delivery_date">
+                                <option value="" selected="">Select a delivery date</option>
+                                <?php
+                                        foreach ($delivery_options as $option) {
+                                            list($days, $price) = explode('|', $option);
+
+                                            // Calculate the future date based on the days
+                                            $future_date = date('Y-m-d', strtotime("+$days days"));
+
+
+                                             $date_for_before_date ="";
+                                            if($days <=  $delivery_after_days){
+                                                $date_for_before_date = date('Y-m-d', strtotime("+$days days"));
+                                            }
+
+                                            
+
+                                            // Disable input if future date matches delivery_after_days
+                                            $disabledinput = ($future_date === $date_for_before_date) ? 'disabled' : '';
+
+                                            // Determine the label for the date
+                                            $date_label = '';
+                                            if ($days == 0) {
+                                                $date_label = 'Today';
+                                            } elseif ($days == 1) {
+                                                $date_label = 'Tomorrow';
+                                            } else {
+                                                $date_label = date_i18n('l jS M', strtotime($future_date));
+                                            }
+
+                                            // Output the option with disabled attribute if applicable
+                                            echo '<option ' . esc_attr($disabledinput) . ' value="' . esc_attr($days) . '" data-price="' . esc_attr($price) . '">' . esc_html("$date_label - £$price") . '</option>';
+                                        }
+                                        ?>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="submit-<?php echo $product->get_id(); ?>">Shop Now</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+jQuery(document).ready(function($) {
+    $('#submit-<?php echo $product->get_id(); ?>').on('click', function(e) {
+        var enteredPostcode = $('#postcode-<?php echo $product->get_id(); ?>').val();
+        var savedPostcode = '<?php echo $saved_postcode; ?>'; // Fetch the saved postcode from PHP
+
+        // Split the saved postcode string into an array
+        var savedPostcodesArray = savedPostcode.split(',');
+
+        // Check if the entered postcode exists in the saved postcodes array
+        if ($.inArray(enteredPostcode, savedPostcodesArray) === -1) {
+            e.preventDefault(); // Prevent form submission
+            $('#postcode-error-<?php echo $product->get_id(); ?>').show(); // Show error message
+        } else {
+            $('#postcode-error-<?php echo $product->get_id(); ?>').hide(); // Hide error message
+            // Allow form submission since postcode is valid
+            $('#productForm-<?php echo $product->get_id(); ?>')[0].submit(); // Submit form
+        }
+    });
+});
+</script>
+
+
 </li>
 
-<style>
-.product-hover {
-    position: relative;
-}
-
-.product-image,
-.product-image-hover {
-    width: 100%;
-    height: auto;
-    transition: opacity 0.3s ease;
-}
-
-.product-image-hover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0; /* Start hidden */
-    z-index: 1; /* Ensure it's on top */
-}
-
-.product-hover:hover .product-image {
-    opacity: 0 !important; /* Hide first image on hover */
-}
-
-.product-hover:hover .product-image-hover {
-    opacity: 1 !important; /* Show second image on hover */
-}
 
 
-</style>

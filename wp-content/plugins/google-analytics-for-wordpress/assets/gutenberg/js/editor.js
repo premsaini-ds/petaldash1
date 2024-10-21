@@ -4907,7 +4907,11 @@ const getBodyLength = async (body) => {
   }
 
   if(_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isSpecCompliantForm(body)) {
-    return (await new Request(body).arrayBuffer()).byteLength;
+    const _request = new Request(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].origin, {
+      method: 'POST',
+      body,
+    });
+    return (await _request.arrayBuffer()).byteLength;
   }
 
   if(_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isArrayBufferView(body) || _utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].isArrayBuffer(body)) {
@@ -4947,18 +4951,13 @@ const resolveBodyLength = async (headers, body) => {
 
   responseType = responseType ? (responseType + '').toLowerCase() : 'text';
 
-  let [composedSignal, stopTimeout] = (signal || cancelToken || timeout) ?
-    (0,_helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_4__["default"])([signal, cancelToken], timeout) : [];
+  let composedSignal = (0,_helpers_composeSignals_js__WEBPACK_IMPORTED_MODULE_4__["default"])([signal, cancelToken && cancelToken.toAbortSignal()], timeout);
 
-  let finished, request;
+  let request;
 
-  const onFinish = () => {
-    !finished && setTimeout(() => {
-      composedSignal && composedSignal.unsubscribe();
-    });
-
-    finished = true;
-  }
+  const unsubscribe = composedSignal && composedSignal.unsubscribe && (() => {
+      composedSignal.unsubscribe();
+  });
 
   let requestContentLength;
 
@@ -4985,7 +4984,7 @@ const resolveBodyLength = async (headers, body) => {
           (0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_5__.progressEventReducer)((0,_helpers_progressEventReducer_js__WEBPACK_IMPORTED_MODULE_5__.asyncDecorator)(onUploadProgress))
         );
 
-        data = (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_6__.trackStream)(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush, encodeText);
+        data = (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_6__.trackStream)(_request.body, DEFAULT_CHUNK_SIZE, onProgress, flush);
       }
     }
 
@@ -4993,6 +4992,9 @@ const resolveBodyLength = async (headers, body) => {
       withCredentials = withCredentials ? 'include' : 'omit';
     }
 
+    // Cloudflare Workers throws when credentials are defined
+    // see https://github.com/cloudflare/workerd/issues/902
+    const isCredentialsSupported = "credentials" in Request.prototype;
     request = new Request(url, {
       ...fetchOptions,
       signal: composedSignal,
@@ -5000,14 +5002,14 @@ const resolveBodyLength = async (headers, body) => {
       headers: headers.normalize().toJSON(),
       body: data,
       duplex: "half",
-      credentials: withCredentials
+      credentials: isCredentialsSupported ? withCredentials : undefined
     });
 
     let response = await fetch(request);
 
     const isStreamResponse = supportsResponseStream && (responseType === 'stream' || responseType === 'response');
 
-    if (supportsResponseStream && (onDownloadProgress || isStreamResponse)) {
+    if (supportsResponseStream && (onDownloadProgress || (isStreamResponse && unsubscribe))) {
       const options = {};
 
       ['status', 'statusText', 'headers'].forEach(prop => {
@@ -5024,8 +5026,8 @@ const resolveBodyLength = async (headers, body) => {
       response = new Response(
         (0,_helpers_trackStream_js__WEBPACK_IMPORTED_MODULE_6__.trackStream)(response.body, DEFAULT_CHUNK_SIZE, onProgress, () => {
           flush && flush();
-          isStreamResponse && onFinish();
-        }, encodeText),
+          unsubscribe && unsubscribe();
+        }),
         options
       );
     }
@@ -5034,9 +5036,7 @@ const resolveBodyLength = async (headers, body) => {
 
     let responseData = await resolvers[_utils_js__WEBPACK_IMPORTED_MODULE_1__["default"].findKey(resolvers, responseType) || 'text'](response, config);
 
-    !isStreamResponse && onFinish();
-
-    stopTimeout && stopTimeout();
+    !isStreamResponse && unsubscribe && unsubscribe();
 
     return await new Promise((resolve, reject) => {
       (0,_core_settle_js__WEBPACK_IMPORTED_MODULE_7__["default"])(resolve, reject, {
@@ -5049,7 +5049,7 @@ const resolveBodyLength = async (headers, body) => {
       })
     })
   } catch (err) {
-    onFinish();
+    unsubscribe && unsubscribe();
 
     if (err && err.name === 'TypeError' && /fetch/i.test(err.message)) {
       throw Object.assign(
@@ -5528,6 +5528,20 @@ class CancelToken {
     }
   }
 
+  toAbortSignal() {
+    const controller = new AbortController();
+
+    const abort = (err) => {
+      controller.abort(err);
+    };
+
+    this.subscribe(abort);
+
+    controller.signal.unsubscribe = () => this.unsubscribe(abort);
+
+    return controller.signal;
+  }
+
   /**
    * Returns an object that contains a new `CancelToken` and a function that, when called,
    * cancels the `CancelToken`.
@@ -5903,7 +5917,10 @@ function AxiosError(message, code, config, request, response) {
   code && (this.code = code);
   config && (this.config = config);
   request && (this.request = request);
-  response && (this.response = response);
+  if (response) {
+    this.response = response;
+    this.status = response.status ? response.status : null;
+  }
 }
 
 _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].inherits(AxiosError, Error, {
@@ -5923,7 +5940,7 @@ _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].inherits(AxiosError, Error, {
       // Axios
       config: _utils_js__WEBPACK_IMPORTED_MODULE_0__["default"].toJSONObject(this.config),
       code: this.code,
-      status: this.response && this.response.status ? this.response.status : null
+      status: this.status
     };
   }
 });
@@ -6952,7 +6969,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   VERSION: () => (/* binding */ VERSION)
 /* harmony export */ });
-const VERSION = "1.7.4";
+const VERSION = "1.7.7";
 
 /***/ }),
 
@@ -7261,49 +7278,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../cancel/CanceledError.js */ "./node_modules/axios/lib/cancel/CanceledError.js");
 /* harmony import */ var _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../core/AxiosError.js */ "./node_modules/axios/lib/core/AxiosError.js");
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../utils.js */ "./node_modules/axios/lib/utils.js");
+
 
 
 
 const composeSignals = (signals, timeout) => {
-  let controller = new AbortController();
+  const {length} = (signals = signals ? signals.filter(Boolean) : []);
 
-  let aborted;
+  if (timeout || length) {
+    let controller = new AbortController();
 
-  const onabort = function (cancel) {
-    if (!aborted) {
-      aborted = true;
-      unsubscribe();
-      const err = cancel instanceof Error ? cancel : this.reason;
-      controller.abort(err instanceof _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"] ? err : new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_1__["default"](err instanceof Error ? err.message : err));
+    let aborted;
+
+    const onabort = function (reason) {
+      if (!aborted) {
+        aborted = true;
+        unsubscribe();
+        const err = reason instanceof Error ? reason : this.reason;
+        controller.abort(err instanceof _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"] ? err : new _cancel_CanceledError_js__WEBPACK_IMPORTED_MODULE_1__["default"](err instanceof Error ? err.message : err));
+      }
     }
-  }
 
-  let timer = timeout && setTimeout(() => {
-    onabort(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"](`timeout ${timeout} of ms exceeded`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ETIMEDOUT))
-  }, timeout)
-
-  const unsubscribe = () => {
-    if (signals) {
-      timer && clearTimeout(timer);
+    let timer = timeout && setTimeout(() => {
       timer = null;
-      signals.forEach(signal => {
-        signal &&
-        (signal.removeEventListener ? signal.removeEventListener('abort', onabort) : signal.unsubscribe(onabort));
-      });
-      signals = null;
+      onabort(new _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"](`timeout ${timeout} of ms exceeded`, _core_AxiosError_js__WEBPACK_IMPORTED_MODULE_0__["default"].ETIMEDOUT))
+    }, timeout)
+
+    const unsubscribe = () => {
+      if (signals) {
+        timer && clearTimeout(timer);
+        timer = null;
+        signals.forEach(signal => {
+          signal.unsubscribe ? signal.unsubscribe(onabort) : signal.removeEventListener('abort', onabort);
+        });
+        signals = null;
+      }
     }
+
+    signals.forEach((signal) => signal.addEventListener('abort', onabort));
+
+    const {signal} = controller;
+
+    signal.unsubscribe = () => _utils_js__WEBPACK_IMPORTED_MODULE_2__["default"].asap(unsubscribe);
+
+    return signal;
   }
-
-  signals.forEach((signal) => signal && signal.addEventListener && signal.addEventListener('abort', onabort));
-
-  const {signal} = controller;
-
-  signal.unsubscribe = unsubscribe;
-
-  return [signal, () => {
-    timer && clearTimeout(timer);
-    timer = null;
-  }];
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (composeSignals);
@@ -7564,7 +7584,7 @@ __webpack_require__.r(__webpack_exports__);
 // Standard browser envs have full support of the APIs needed to test
 // whether the request URL is of the same origin as current location.
   (function standardBrowserEnv() {
-    const msie = /(msie|trident)/i.test(navigator.userAgent);
+    const msie = _platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator && /(msie|trident)/i.test(_platform_index_js__WEBPACK_IMPORTED_MODULE_0__["default"].navigator.userAgent);
     const urlParsingNode = document.createElement('a');
     let originURL;
 
@@ -8355,14 +8375,34 @@ const streamChunk = function* (chunk, chunkSize) {
   }
 }
 
-const readBytes = async function* (iterable, chunkSize, encode) {
-  for await (const chunk of iterable) {
-    yield* streamChunk(ArrayBuffer.isView(chunk) ? chunk : (await encode(String(chunk))), chunkSize);
+const readBytes = async function* (iterable, chunkSize) {
+  for await (const chunk of readStream(iterable)) {
+    yield* streamChunk(chunk, chunkSize);
   }
 }
 
-const trackStream = (stream, chunkSize, onProgress, onFinish, encode) => {
-  const iterator = readBytes(stream, chunkSize, encode);
+const readStream = async function* (stream) {
+  if (stream[Symbol.asyncIterator]) {
+    yield* stream;
+    return;
+  }
+
+  const reader = stream.getReader();
+  try {
+    for (;;) {
+      const {done, value} = await reader.read();
+      if (done) {
+        break;
+      }
+      yield value;
+    }
+  } finally {
+    await reader.cancel();
+  }
+}
+
+const trackStream = (stream, chunkSize, onProgress, onFinish) => {
+  const iterator = readBytes(stream, chunkSize);
 
   let bytes = 0;
   let done;
@@ -8614,9 +8654,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   hasBrowserEnv: () => (/* binding */ hasBrowserEnv),
 /* harmony export */   hasStandardBrowserEnv: () => (/* binding */ hasStandardBrowserEnv),
 /* harmony export */   hasStandardBrowserWebWorkerEnv: () => (/* binding */ hasStandardBrowserWebWorkerEnv),
+/* harmony export */   navigator: () => (/* binding */ _navigator),
 /* harmony export */   origin: () => (/* binding */ origin)
 /* harmony export */ });
 const hasBrowserEnv = typeof window !== 'undefined' && typeof document !== 'undefined';
+
+const _navigator = typeof navigator === 'object' && navigator || undefined;
 
 /**
  * Determine if we're running in a standard browser environment
@@ -8635,10 +8678,8 @@ const hasBrowserEnv = typeof window !== 'undefined' && typeof document !== 'unde
  *
  * @returns {boolean}
  */
-const hasStandardBrowserEnv = (
-  (product) => {
-    return hasBrowserEnv && ['ReactNative', 'NativeScript', 'NS'].indexOf(product) < 0
-  })(typeof navigator !== 'undefined' && navigator.product);
+const hasStandardBrowserEnv = hasBrowserEnv &&
+  (!_navigator || ['ReactNative', 'NativeScript', 'NS'].indexOf(_navigator.product) < 0);
 
 /**
  * Determine if we're running in a standard browser webWorker environment

@@ -9,3 +9,58 @@ This is the child theme for Petal Dash theme, generated with Generate Child Them
 
 (optional values you can add: Theme URI, Author URI, License, License URI, Tags, Text Domain)
 */
+
+
+
+
+  .category-tabs .tabs {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.category-tabs .tabs .tab-item {
+    margin-right: 20px;
+}
+.category-tabs .tabs .tab-item a {
+    text-decoration: none;
+    padding: 10px;
+    background-color: #f5f5f5;
+    color: #333;
+    border-radius: 5px;
+}
+.category-tabs .tabs .tab-item a:hover {
+    background-color: #0073aa;
+    color: white;
+}
+
+
+
+
+
+.product-hover {
+    position: relative;
+}
+
+.product-image,
+.product-image-hover {
+    width: 100%;
+    height: auto;
+    transition: opacity 0.3s ease;
+}
+
+.product-image-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0; /* Start hidden */
+    z-index: 1; /* Ensure it's on top */
+}
+
+.product-hover:hover .product-image {
+    opacity: 0 !important; /* Hide first image on hover */
+}
+
+.product-hover:hover .product-image-hover {
+    opacity: 1 !important; /* Show second image on hover */
+}

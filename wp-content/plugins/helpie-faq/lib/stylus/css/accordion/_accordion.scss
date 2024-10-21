@@ -1,0 +1,282 @@
+/* Base */
+
+@mixin toggle-position-left() {
+	left: 0px;
+	right: initial;
+	margin-left: 37px;
+	margin-right: 0px;
+}
+
+@mixin adjusting-title-if-icon-left() {
+	padding-right: 0px;
+	padding-left: 35px;
+}
+
+@mixin title-icon {
+	& .accordion__title-icon {
+		padding: 0px 10px;
+
+		// &.accordion__title-iconPosition{
+		// 	&--left{
+		// 		float: left;
+		// 	}
+		// 	&--right{
+		// 		float: right;
+		// 	}
+		// }
+	}
+}
+
+@mixin default-accordion-header-stlyes($default_styles: true) {
+	@if $default_styles == true {
+		font-size: 100%;
+		font-weight: 600;
+	}
+	padding-right: 10px;
+
+	@include title-icon;
+}
+
+$body_font_color: "";
+
+/** get the text color from elementor*/
+@if var(--e-global-color-text) == true {
+	$body_font_color: var(--e-global-color-text);
+}
+
+// Padding and Margin of Accordion Items
+.accordion {
+	& .accordion__item {
+		& .accordion__header {
+			padding: 15px;
+		}
+
+		& .accordion__body {
+			padding: 0 15px;
+
+			& p {
+				margin-bottom: 15px;
+			}
+		}
+	}
+}
+
+.accordion {
+	margin: 40px 0;
+	overflow: hidden;
+	padding: 0;
+
+	&--show {
+		display: block;
+	}
+
+	&--hide {
+		display: none;
+	}
+
+	&.faq_list {
+		& .accordion__item {
+			// border-bottom: solid 1px #44596b;
+			& .accordion__header {
+				padding: 5px 30px;
+			}
+			& .accordion__body {
+				padding: 5px 30px;
+			}
+		}
+	}
+
+	& .accordion__item {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		border-bottom: solid 1px #44596b;
+
+		&--show {
+			display: block;
+		}
+
+		&--hide {
+			display: none;
+		}
+
+		& .accordion__header {
+			// background: #FFFFFF;
+			border: none;
+			cursor: pointer;
+			display: block;
+			outline: none;
+
+			position: relative;
+			text-align: left;
+			width: 100%;
+
+			& div.accordion__title {
+				@include default-accordion-header-stlyes(true);
+			}
+			& h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p.accordion__title {
+				@include default-accordion-header-stlyes(false);
+			}
+
+			& .accordion__toggle {
+				position: absolute;
+				right: 0;
+				top: 50%;
+				margin-right: 37px;
+				margin-top: -12px;
+
+				// Custom Icon Size
+				& span .accordion__toggle-icons {
+					font-size: 18px;
+					-webkit-transition: all 0.2s ease-in-out;
+					-moz-transition: all 0.2s ease-in-out;
+					-ms-transition: all 0.2s ease-in-out;
+					-o-transition: all 0.2s ease-in-out;
+					transition: all 0.2s ease-in-out;
+				}
+			}
+
+			& .accordion__toggle.open-all {
+				& .accordion__toggle--open {
+					display: none;
+				}
+
+				& .accordion__toggle--close {
+					display: block;
+				}
+			}
+
+			/** Styles for to show the toggle icons in left side  */
+			&.accordion__icon__position--ltr {
+				&::after {
+					@include toggle-position-left;
+				}
+
+				&::before {
+					@include toggle-position-left;
+				}
+
+				& .accordion__title {
+					@include adjusting-title-if-icon-left;
+				}
+
+				& .accordion__toggle {
+					@include toggle-position-left;
+				}
+			}
+		}
+
+		& .accordion__body {
+			// padding: 25px 25px 0;
+			display: none;
+			overflow: hidden;
+			font-weight: normal;
+			color: $body_font_color;
+		}
+	}
+}
+
+.accordion__header:before {
+	// background: #44596B;
+	content: "";
+	height: 2px;
+	margin-right: 37px;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	-webkit-transform: rotate(90deg);
+	-moz-transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-o-transform: rotate(90deg);
+	transform: rotate(90deg);
+	-webkit-transition: all 0.2s ease-in-out;
+	-moz-transition: all 0.2s ease-in-out;
+	-ms-transition: all 0.2s ease-in-out;
+	-o-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	width: 14px;
+}
+.accordion__header:after {
+	// background: #44596B;
+	content: "";
+	height: 2px;
+	margin-right: 37px;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 14px;
+}
+
+.accordion__header.active:before {
+	-webkit-transform: rotate(0deg);
+	-moz-transform: rotate(0deg);
+	-ms-transform: rotate(0deg);
+	-o-transform: rotate(0deg);
+	transform: rotate(0deg);
+}
+
+.accordion__header.active .accordion__title,
+.accordion__header:focus .accordion__title {
+	position: relative;
+}
+
+.accordion.faq_list {
+	.accordion__item {
+		// border: none;
+		.accordion__header {
+			display: block;
+		}
+		.accordion__header:after,
+		.accordion__header:before {
+			visibility: hidden;
+		}
+		.accordion__body {
+			display: block;
+		}
+	}
+}
+
+.accordion__header.custom-icon:after,
+.accordion__header.custom-icon:before {
+	content: none;
+}
+
+.accordion__header.custom-icon {
+	& .accordion__toggle {
+		& .accordion__toggle--open {
+			display: block;
+		}
+		& .accordion__toggle--close {
+			display: none;
+		}
+	}
+}
+
+.accordion__header.custom-icon.active {
+	& .accordion__toggle {
+		& .accordion__toggle--open {
+			display: none;
+		}
+		& .accordion__toggle--close {
+			display: block;
+		}
+	}
+}
+
+/** accordion heading*/
+.accordion__heading {
+	&--show {
+		display: block;
+	}
+	&--hide {
+		display: none;
+	}
+
+	@include title-icon;
+}

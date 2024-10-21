@@ -1,0 +1,73 @@
+$primary-bgcolor: #272727;
+$secondary-bgcolor: #171717;
+$font-color: #fcfcfc;
+$border-color: #444;
+
+// placeholder color
+@mixin placeholder-color($color) {
+	&::-webkit-input-placeholder {
+		/* WebKit browsers */
+		color: $color;
+	}
+	&:-moz-placeholder {
+		/* Mozilla Firefox 4 to 18 */
+		color: $color;
+	}
+	&::-moz-placeholder {
+		/* Mozilla Firefox 19+ */
+		color: $color;
+	}
+	&:-ms-input-placeholder {
+		/* Internet Explorer 10+ */
+		color: $color;
+	}
+}
+
+// Panel
+.accordion__body {
+	background: $primary-bgcolor;
+	color: $font-color;
+
+	& p,
+	& h1,
+	& h2,
+	& h3,
+	& h4,
+	& h5,
+	& h6 {
+		color: $font-color;
+	}
+}
+
+// Control
+.accordion__header {
+	background: $secondary-bgcolor;
+	// border-color: $border-color; // TODO: remove it,later.
+	color: $font-color;
+}
+
+.accordion__header:before,
+.accordion__header:after {
+	background: $font-color;
+}
+
+.form__section.dark {
+	background: $primary-bgcolor;
+
+	& label {
+		color: $font-color;
+	}
+}
+
+//search
+.search {
+	&__input {
+		background: $primary-bgcolor;
+		color: $font-color;
+		// $border: 1px solid $border-color;
+		@include placeholder-color($font-color);
+	}
+	&__icon {
+		color: $font-color;
+	}
+}

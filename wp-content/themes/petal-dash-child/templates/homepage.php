@@ -37,9 +37,12 @@ get_header();
                 <!-- Form: Postcode and Shop Now button -->
               
                 <form method="GET" action="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>" class="postcode-form d-flex justify-content-center mb-4">
+                    <div class="input-postcode">
                 <input type="text" id="postcode" name="postcode" class="form-control form-control w-20" placeholder="Enter your postcode" required>
                  <span class="home-search"><img src="<?php echo get_template_directory_uri();?>/images/search-home.png"></span>
+                   </div>
                 <!-- <input type="date" id="delivery_date" name="delivery_date" class="form-control w-50"> -->
+                 <div class="snytimeselect">
                   <select id="delivery_date" name="delivery_date">
                   <option value="" selected="">Anytime</option> <!-- Default anytime option -->
                 <?php
@@ -61,6 +64,7 @@ get_header();
             </select>
 
                 <span class="home-date"><img src="<?php echo get_template_directory_uri();?>/images/search-date.png"></span>
+            </div>
                 <button type="submit" class="btn btn-primary ms-0">Shop Now</button>
          
                 
@@ -83,92 +87,80 @@ get_header();
 <section id="most-popular-flowers" class="most-popular margin-top">
     <div class="container">
         <h2 class="text-center mb-4">Most Popular Flowers</h2>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <?php
-                // Fetch most popular WooCommerce products (modify for flowers category)
-                $args = array(
-                    'post_type' => 'product',
-                    'posts_per_page' => 8, // Adjust the number of products
-                    'meta_key' => 'total_sales',
-                    'orderby' => 'meta_value_num',
-                    'order' => 'DESC',
-                    'tax_query' => array(
-                        array(
-                            'taxonomy' => 'product_cat',
-                            'field'    => 'slug',
-                            'terms'    => 'flowers', // Adjust to your flowers category slug
-                        ),
+        <div class="owl-carousel owl-theme carousel">
+            <?php
+            // Fetch most popular WooCommerce products
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => 8,
+                'meta_key' => 'total_sales',
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+                'tax_query' => array(
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field'    => 'slug',
+                        'terms'    => 'flowers',
                     ),
-                );
-                $loop = new WP_Query($args);
-                $is_active = true;
-                $product_count = 0;
+                    array(
+                        'taxonomy' => 'product_type', // Change this to your taxonomy if different
+                        'field'    => 'slug', // You can also use 'term_id' if you prefer
+                        'terms'    => array('gift-card'), // Exclude products of this type
+                        'operator' => 'NOT IN', // Exclude products of this type
+                    ),
+                ),
+            );
+            $loop = new WP_Query($args);
 
-                if ($loop->have_posts()) :
-                    while ($loop->have_posts()) : $loop->the_post();
-                        global $product;
+            if ($loop->have_posts()) :
+                while ($loop->have_posts()) : $loop->the_post();
+                    global $product;
 
-                        if ($product_count % 4 == 0) {
-                            // Start a new carousel item
-                            echo '<div class="carousel-item ' . ($is_active ? 'active' : '') . '">';
-                            echo '<div class="row">';
-                        }
-                        ?>
-                        <div class="col-md-3">
-                            <div class="card text-center">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                                        <?php the_title(); ?>
-                                        <span class="star-rating">
-                                            <?php
-                                             // Get average rating
-                                                $average_rating = $product->get_average_rating();
-                                                // Format the rating to one decimal place
-                                                $average_rating = number_format($average_rating, 1);
-                                                // Display one star icon
-                                                echo '<i class="fa fa-star"></i> ' . esc_html($average_rating);
-                                            ?>
-                                        </span>
-                                    </h5>
-                                     <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 3); // Short description ?></p>
-                                    <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
-                                 
-                                </div>
+                    // Fetch the product postcode(s) stored in meta
+                    $saved_postcode = get_post_meta($product->get_id(), 'product_postcode', true); // Assuming saved as a string
+
+                    if (!empty($saved_postcode)) {
+                        $saved_postcode = esc_js($saved_postcode); // Escape for use in JS
+                    }
+
+
+
+                    ?>
+                    <div class="item">
+                        <div class="card text-center">
+                            <a href="#" class="product-hover" data-bs-toggle="modal"  data-saved-postcode="<?php echo esc_js(get_post_meta($product->get_id(), 'product_postcode', true)); ?>" data-delivery-options="<?php echo esc_attr(get_option('custom_delivery_options_data')); ?>"
+                                data-bs-target="#productModal" 
+                               data-product-id="<?php echo $product->get_id(); ?>" data-product-url="<?php echo esc_url(get_permalink()); ?>"
+                               data-delivery-after-days="<?php echo esc_attr(get_post_meta($product->get_id(), 'delivery_after_days', true)); ?>">
+                                <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    <?php the_title(); ?>
+                                    <span class="star-rating">
+                                        <?php
+                                        $average_rating = number_format($product->get_average_rating(), 1);
+                                        echo '<i class="fa fa-star"></i> ' . esc_html($average_rating);
+                                        ?>
+                                    </span>
+                                </h5>
+                                <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 3); ?></p>
+                                <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
                             </div>
                         </div>
-                        <?php
-                        $product_count++;
-
-                        if ($product_count % 4 == 0 || $product_count == $loop->post_count) {
-                            // Close the row and carousel item
-                            echo '</div>'; // Close row
-                            echo '</div>'; // Close carousel item
-                            $is_active = false;
-                        }
-                    endwhile;
-                else :
-                    echo '<div class="carousel-item active"><div class="row"><div class="col-12 text-center"><p>No popular flowers found.</p></div></div></div>';
-                endif;
-                wp_reset_postdata();
-                ?>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                    </div>
+                    <?php
+                endwhile;
+            else :
+                echo '<div class="item"><div class="text-center"><p>No popular flowers found.</p></div></div>';
+            endif;
+            wp_reset_postdata();
+            ?>
         </div>
-    </div>
+
+
+
 </section>
-
-
 
 
 <?php
@@ -202,7 +194,7 @@ get_header();
 			    <?php endif; ?>
 
             <!-- Grid Item 1: 100% Recyclable Packaging -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-6">
 <div class="sustainability-box">
             <span><img src="<?php echo get_template_directory_uri();?>/images/sustainability.png"></span>
 
@@ -213,7 +205,7 @@ get_header();
             </div>
 
             <!-- Grid Item 2: Ribbons Made from Recycled Bottles -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="sustainability-box">
             <span><img src="<?php echo get_template_directory_uri();?>/images/recycled.png"></span>
 
@@ -224,7 +216,7 @@ get_header();
             </div>
 
             <!-- Grid Item 3: Zero Waste to Landfill -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="sustainability-box">
             <span><img src="<?php echo get_template_directory_uri();?>/images/zero-flowee.png"></span>
                  <?php if( !empty($sustainability_col_3) ): ?>
@@ -234,7 +226,7 @@ get_header();
             </div>
 
             <!-- Grid Item 4: Carbon Neutral -->
-            <div class="col-md-3">
+            <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="sustainability-box">
             <span><img src="<?php echo get_template_directory_uri();?>/images/carbon.png"></span>
                   <?php if( !empty($sustainability_col_4) ): ?>
@@ -251,77 +243,65 @@ get_header();
 <section id="best-selling-products" class="most-popular best-selling margin-top">
     <div class="container">
         <h2 class="text-center mb-4">Best Selling Products</h2>
-        <div id="BestSellingProducts" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <?php
-                // Fetch best-selling WooCommerce products
-                $args = array(
-                    'post_type' => 'product',
-                    'posts_per_page' => 8, // Adjust the number of products
-                    'meta_key' => 'total_sales',
-                    'orderby' => 'meta_value_num',
-                    'order' => 'DESC',
-                    // Remove the tax_query if you want all best-selling products, not just flowers
-                );
-                $loop = new WP_Query($args);
-                $is_active = true;
-                $product_count = 0;
+        <div class="owl-carousel owl-theme carousel">
+            <?php
+            // Fetch best-selling WooCommerce products
+            $args = array(
+                'post_type' => 'product',
+                'posts_per_page' => 8, // Adjust the number of products
+                'meta_key' => 'total_sales',
+                'orderby' => 'meta_value_num',
+                'order' => 'DESC',
+                'tax_query' => array(
+                        array(
+                            'taxonomy' => 'product_type', // Change this to your taxonomy if different
+                            'field'    => 'slug', // You can also use 'term_id' if you prefer
+                            'terms'    => array('gift-card'), // Exclude products of this type
+                            'operator' => 'NOT IN', // Exclude products of this type
+                        ),
+                    ),
+                // Remove the tax_query if you want all best-selling products, not just flowers
+            );
+            $loop = new WP_Query($args);
 
-                if ($loop->have_posts()) :
-                    while ($loop->have_posts()) : $loop->the_post();
-                        global $product;
+            if ($loop->have_posts()) :
+                while ($loop->have_posts()) : $loop->the_post();
+                    global $product;
+                    ?>
+                    <div class="item"> <!-- Owl Carousel item -->
+                        <div class="card text-center">
+                             <a href="#" class="product-hover" data-saved-postcode="<?php echo esc_js(get_post_meta($product->get_id(), 'product_postcode', true)); ?>" 
+                                 data-delivery-options="<?php echo esc_attr(get_option('custom_delivery_options_data')); ?>" data-bs-toggle="modal" data-bs-target="#productModal" 
+                               data-product-id="<?php echo $product->get_id(); ?>" data-product-url="<?php echo esc_url(get_permalink()); ?>"
+                               data-delivery-after-days="<?php echo esc_attr(get_post_meta($product->get_id(), 'delivery_after_days', true)); ?>">
+                                <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
 
-                        if ($product_count % 4 == 0) {
-                            // Start a new carousel item
-                            echo '<div class="carousel-item ' . ($is_active ? 'active' : '') . '">';
-                            echo '<div class="row">';
-                        }
-                        ?>
-                        <div class="col-md-3">
-                            <div class="card text-center">
-                                <a href="<?php the_permalink(); ?>">
-                                    <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title d-flex justify-content-between align-items-center">
-                                        <?php the_title(); ?>
-                                        <span class="star-rating">
-                                            <i class="fa fa-star"></i> <!-- Single star icon -->
-                                            <span class="ms-2"><?php echo esc_html($product->get_average_rating()); ?></span> <!-- Show rating number -->
-                                        </span>
-                                    </h5>
-                                    <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 10); // Short description ?></p>
-                                    <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
-                                </div>
+                                <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title d-flex justify-content-between align-items-center">
+                                    <?php the_title(); ?>
+                                    <span class="star-rating">
+                                        <i class="fa fa-star"></i> <!-- Single star icon -->
+                                        <span class="ms-2"><?php echo esc_html($product->get_average_rating()); ?></span> <!-- Show rating number -->
+                                    </span>
+                                </h5>
+                                <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 10); // Short description ?></p>
+                                <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
                             </div>
                         </div>
-                        <?php
-                        $product_count++;
-
-                        if ($product_count % 4 == 0 || $product_count == $loop->post_count) {
-                            // Close the row and carousel item
-                            echo '</div>'; // Close row
-                            echo '</div>'; // Close carousel item
-                            $is_active = false;
-                        }
-                    endwhile;
-                else :
-                    echo '<div class="carousel-item active"><div class="row"><div class="col-12 text-center"><p>No best selling products found.</p></div></div></div>';
-                endif;
-                wp_reset_postdata();
-                ?>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#BestSellingProducts" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#BestSellingProducts" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                    </div>
+                    <?php
+                endwhile;
+            else :
+                echo '<div class="item"><div class="text-center"><p>No best-selling products found.</p></div></div>';
+            endif;
+            wp_reset_postdata();
+            ?>
         </div>
-    </div>
+            </div>
 </section>
+
 
 
 
@@ -414,85 +394,135 @@ get_header();
 <section id="recently-viewed-products" class="most-popular best-selling margin-top">
     <div class="container">
         <h2 class="text-center mb-4">Recently Viewed by You</h2>
-        <div id="recentlyViewedCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <?php
-                // Get the recently viewed products from the WooCommerce cookie
-                $recently_viewed = isset($_COOKIE['woocommerce_recently_viewed']) ? explode('|', $_COOKIE['woocommerce_recently_viewed']) : array();
+        <div class="owl-carousel owl-theme">
+            <?php
+            // Get the recently viewed products from the WooCommerce cookie
+            $recently_viewed = isset($_COOKIE['woocommerce_recently_viewed']) ? explode('|', $_COOKIE['woocommerce_recently_viewed']) : array();
 
-                // If there are no recently viewed products, display a message
-                if (empty($recently_viewed)) {
-                    echo '<div class="carousel-item active"><div class="row"><div class="col-12 text-center"><p>No recently viewed products.</p></div></div></div>';
-                } else {
-                    $args = array(
+            // If there are no recently viewed products, display a message
+            if (empty($recently_viewed)) {
+                echo '<div class="item"><div class="text-center"><p>No recently viewed products.</p></div></div>';
+            } else {
+               $args = array(
                         'post_type' => 'product',
                         'posts_per_page' => 8, // Adjust the number of products
                         'post__in' => $recently_viewed, // Get only the recently viewed products
                         'orderby' => 'post__in', // Preserve the order of the IDs
+                        'tax_query' => array(
+                            array(
+                                'taxonomy' => 'product_type', // Change this to your taxonomy if different
+                                'field'    => 'slug', // You can also use 'term_id' if you prefer
+                                'terms'    => array('gift-card'), // Exclude products with this type
+                                'operator' => 'NOT IN', // Exclude products of this type
+                            ),
+                        ),
                     );
-                    $loop = new WP_Query($args);
-                    $is_active = true;
-                    $product_count = 0;
 
-                    if ($loop->have_posts()) :
-                        while ($loop->have_posts()) : $loop->the_post();
-                            global $product;
 
-                            if ($product_count % 4 == 0) {
-                                // Start a new carousel item
-                                echo '<div class="carousel-item ' . ($is_active ? 'active' : '') . '">';
-                                echo '<div class="row">';
-                            }
-                            ?>
-                            <div class="col-md-3">
-                                <div class="card text-center">
-                                    <a href="<?php the_permalink(); ?>">
-                                        <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
-                                    </a>
-                                    <div class="card-body">
-                                        <h5 class="card-title d-flex justify-content-between align-items-center">
-                                            <?php the_title(); ?>
-                                            <span class="star-rating">
-                                                <i class="fa fa-star"></i> <!-- Single star icon -->
-                                                <span class="ms-2"><?php echo esc_html($product->get_average_rating() ?: '0'); ?></span> <!-- Show rating number -->
-                                            </span>
-                                        </h5>
-                                        <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 10); // Short description ?></p>
-                                        <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
-                                    </div>
+                $loop = new WP_Query($args);
+
+                if ($loop->have_posts()) :
+                    while ($loop->have_posts()) : $loop->the_post();
+                        global $product;
+                        ?>
+                        <div class="item"> <!-- Owl Carousel item -->
+                            <div class="card text-center">
+                                 <a href="#" class="product-hover" data-bs-toggle="modal"    data-saved-postcode="<?php echo esc_js(get_post_meta($product->get_id(), 'product_postcode', true)); ?>"   data-delivery-options="<?php echo esc_attr(get_option('custom_delivery_options_data')); ?>" data-bs-target="#productModal" 
+                               data-product-id="<?php echo $product->get_id(); ?>" data-product-url="<?php echo esc_url(get_permalink()); ?>"
+                               data-delivery-after-days="<?php echo esc_attr(get_post_meta($product->get_id(), 'delivery_after_days', true)); ?>">
+
+
+                                    <?php the_post_thumbnail('medium', array('class' => 'img-fluid card-img-top')); ?>
+                                </a>
+                                <div class="card-body">
+                                    <h5 class="card-title d-flex justify-content-between align-items-center">
+                                        <?php the_title(); ?>
+                                        <span class="star-rating">
+                                            <i class="fa fa-star"></i> <!-- Single star icon -->
+                                            <span class="ms-2"><?php echo esc_html($product->get_average_rating() ?: '0'); ?></span> <!-- Show rating number -->
+                                        </span>
+                                    </h5>
+                                    <p class="card-text"><?php echo wp_trim_words(get_the_excerpt(), 10); // Short description ?></p>
+                                    <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
                                 </div>
                             </div>
-                            <?php
-                            $product_count++;
+                        </div>
+                        <?php
+                    endwhile;
+                else:
+                    echo '<div class="item"><div class="text-center"><p>No recently viewed products found.</p></div></div>';
+                endif;
 
-                            if ($product_count % 4 == 0 || $product_count == $loop->post_count) {
-                                // Close the row and carousel item
-                                echo '</div>'; // Close row
-                                echo '</div>'; // Close carousel item
-                                $is_active = false;
-                            }
-                        endwhile;
-                    else:
-                        echo '<div class="carousel-item active"><div class="row"><div class="col-12 text-center"><p>No recently viewed products found.</p></div></div></div>';
-                    endif;
-
-                    wp_reset_postdata();
-                }
-                ?>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#recentlyViewedCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#recentlyViewedCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+                wp_reset_postdata();
+            }
+            ?>
         </div>
-    </div>
+            </div>
 </section>
+    
+
+<script>
+jQuery(document).ready(function($) {
+    $('.owl-carousel11').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false, // Disable pagination dots
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        navText: [
+            '<button class="carousel-control-prev"><i class="fa fa-chevron-left"></i></button>',
+            '<button class="carousel-control-next"><i class="fa fa-chevron-right"></i></button>'
+        ],
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+});
 
 
+</script>
+
+
+<script>
+jQuery(document).ready(function($) {
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        dots: false, // Disable pagination dots
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        navText: [
+            '<button class="carousel-control-prev"><i class="fa fa-chevron-left"></i></button>',
+            '<button class="carousel-control-next"><i class="fa fa-chevron-right"></i></button>'
+        ],
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 4
+            }
+        }
+    });
+});
+
+
+</script>
 
 <?php
 
@@ -534,6 +564,20 @@ get_header();
 </section>
 
 <!-- end dose of love section -->
+
+ 
+
+<section class="revirew-production-section margin-top mb-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Hear what our happy customers have to say</h2>
+             <div class="owl-theme">
+                <div class="custom-review-home">
+                    <?php echo do_shortcode('[custom_recent_reviews_carousel limit="5"]'); ?>
+                </div>
+            </div>
+        </div>
+</section>
+
 
 
 <?php get_footer(); ?>

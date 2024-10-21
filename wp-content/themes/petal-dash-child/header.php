@@ -125,18 +125,24 @@
 
 				<div class="woocommerce_header_menu">
 				    <ul class="woocommerce_list">
-				        <!-- Search link (optional: you could link to a custom search page or trigger a search modal) -->
-				        <li><a href="<?php echo site_url('/search'); ?>"><i class="fa fa-search"></i> Search</a></li>
-				        
+				          <li>
+
+				        	<!-- <a href="<?php //echo site_url('/search'); ?>"><i class="fa fa-search"></i> Search</a> -->
+
+				        	<?php echo do_shortcode('[ivory-search id="249" title="Custom Search Form"] '); ?>
+				        </li>
 				      <?php if ( is_user_logged_in() ) : ?>
-						    <li><a href="<?php echo wc_get_page_permalink('myaccount'); ?>"><i class="fa fa-user"></i> My Account</a></li>
+						    <li><a href="<?php echo wc_get_page_permalink('myaccount'); ?>"><img src="<?php echo get_stylesheet_directory_uri();?>/images/user-login.png" class="user-icon" alt="user-icon"> My Account</a></li>
 						<?php else : ?>
-						    <li><a href="<?php echo wc_get_page_permalink('myaccount'); ?>"><i class="fa fa-user"></i> Login/Register</a></li>
+						    <li class="login-user"><a href="<?php echo wc_get_page_permalink('myaccount'); ?>"><img src="<?php echo get_stylesheet_directory_uri();?>/images/user-login.png" class="user-icon" alt="user-icon"> Login/Register</a></li>
 						<?php endif; ?>
 
 				        
-				        <!-- Your Cart link using WooCommerce cart page URL -->
-				        <li><a href="<?php echo wc_get_cart_url(); ?>"><i class="fa fa-shopping-cart"></i> Your Cart</a></li>
+				   	  <li class="topcart">
+				        	<?php echo do_shortcode('[xoo_wsc_cart] '); ?>
+				        	<!-- <a href="<?php echo wc_get_cart_url(); ?>"><i class="fa fa-shopping-cart"></i> Your Cart</a> -->
+				        </li>
+				    </ul>
 				    </ul>
 				</div>
 

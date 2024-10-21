@@ -1,0 +1,20 @@
+// .accordion {  // TODO: remove it,later.
+// border-color: #F2F2F2;
+// }
+
+// Panel
+.accordion__body {
+	background: #fcfcfc; // border-left: solid 2px $third-color;
+}
+
+// Control
+.accordion__header {
+	background: #ffffff;
+	// border-color: #F2F2F2; // TODO: remove it,later.
+}
+
+// Icon
+.accordion__header:before,
+.accordion__header:after {
+	background: #44596b;
+}

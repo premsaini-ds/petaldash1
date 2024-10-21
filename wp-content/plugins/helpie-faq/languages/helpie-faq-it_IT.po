@@ -1,0 +1,482 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Helpie FAQ\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-21 07:12+0000\n"
+"PO-Revision-Date: 2020-07-21 07:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.0; wp-5.4.2"
+
+#. Dashboard FAQ Menu and CPT FAQs Section
+msgid "FAQ"
+msgstr "FAQ"
+
+msgid "FAQs"
+msgstr "FAQs"
+
+msgid "All FAQs"
+msgstr "Tutte le FAQ"
+
+msgid "Show Title"
+msgstr "Mostra titolo"
+
+msgid "Helpie FAQ"
+msgstr "FAQ di Helpie"
+
+msgid "Select FAQ Title Tag"
+msgstr "Seleziona il tag del titolo della FAQ"
+
+msgid "Add New FAQ"
+msgstr "Aggiungi nuova FAQ"
+
+msgid "Add New"
+msgstr "Aggiungi nuovo"
+
+msgid "New FAQ"
+msgstr "Nuova FAQ"
+
+msgid "Edit FAQ"
+msgstr "Modifica FAQ"
+
+msgid "Add FAQ"
+msgstr "Aggiungi FAQ"
+
+msgid "Hide"
+msgstr "Nascondi"
+
+msgid "View FAQ"
+msgstr "Visualizza FAQ"
+
+msgid "FAQ Category"
+msgstr "Categoria FAQ"
+
+msgid "Categories"
+msgstr "Categorie"
+
+msgid "KB Categories"
+msgstr "Categorie KB"
+
+msgid "Woo Products"
+msgstr "Prodotti Woo"
+
+msgid "All FAQ Categories"
+msgstr "Tutte le categorie delle FAQ"
+
+msgid "FAQ Categories"
+msgstr "Categorie FAQ"
+
+msgid "FAQ Tag"
+msgstr "Tag FAQ"
+
+msgid "Tags"
+msgstr "Tag"
+
+msgid "All FAQ Tags"
+msgstr "Tutti i tag delle FAQ"
+
+msgid "FAQ Tags"
+msgstr "Tag delle FAQ"
+
+msgid "FAQ Settings"
+msgstr "Impostazioni delle FAQ"
+
+#. General Tab
+msgid "General"
+msgstr "Generale"
+
+msgid "Title"
+msgstr "Titolo"
+
+msgid "FAQ Title"
+msgstr "Titolo della FAQ"
+
+msgid "Show Search"
+msgstr "Mostra ricerca"
+
+msgid "Show Search in FAQ"
+msgstr "Mostra ricerca nella FAQ"
+
+msgid "You can search through all FAQ items"
+msgstr "Puoi cercare tra tutti gli articoli delle FAQ"
+
+msgid "Search Placeholder"
+msgstr "Segnaposto ricerca"
+
+msgid "Search Placeholder text"
+msgstr "Testo segnaposto ricerca"
+
+msgid "FAQ Search Placeholder text"
+msgstr "Testo segnaposto ricerca FAQ"
+
+msgid "Search FAQ"
+msgstr "Cerca nella FAQ"
+
+msgid "Search By Tags"
+msgstr "Cerca per tag"
+
+msgid "Toggle"
+msgstr "Attiva/Disattiva"
+
+msgid "Toggle Open / closed Previous Item"
+msgstr "Attiva/Disattiva elemento precedente"
+
+msgid "FAQ Open By Default"
+msgstr "FAQ aperte per impostazione predefinita"
+
+msgid "None"
+msgstr "Nessuna"
+
+msgid "Open First FAQ"
+msgstr "Apri prima la FAQ"
+
+msgid "Add FAQ Url Attribute"
+msgstr "Aggiungi attributo URL della FAQ"
+
+msgid "Faq item added in url"
+msgstr "Elemento della FAQ aggiunto nell'URL"
+
+msgid "Display Mode"
+msgstr "Modalità di visualizzazione"
+
+msgid "Simple Accordion"
+msgstr "Accordion semplice"
+
+msgid "Simple Accordion by Category"
+msgstr "Accordion semplice per categoria"
+
+msgid "Category Accordion"
+msgstr "Accordion per categoria"
+
+msgid "FAQ List"
+msgstr "Lista delle FAQ"
+
+msgid "Open First FAQ Item"
+msgstr "Apri prima l'articolo della FAQ"
+
+msgid "First item open by default"
+msgstr "Primo articolo aperto per impostazione predefinita"
+
+msgid "Sort By"
+msgstr "Ordina per"
+
+msgid "Publish Date"
+msgstr "Data di pubblicazione"
+
+msgid "Updated Date"
+msgstr "Data di aggiornamento"
+
+msgid "Alphabetical"
+msgstr "Alfabetico"
+
+msgid "Order"
+msgstr "Ordine"
+
+msgid "Ascending"
+msgstr "Crescente"
+
+msgid "Descending"
+msgstr "Decrescente"
+
+msgid "Limit"
+msgstr "Limite"
+
+msgid "Limit ( number of items )"
+msgstr "Limite (numero di elementi)"
+
+msgid "Limit of the FAQ items"
+msgstr "Limite degli articoli delle FAQ"
+
+msgid "Enable wpautop"
+msgstr "Abilita wpautop"
+
+msgid "Enable / Disable wpautop"
+msgstr "Abilita/Disabilita wpautop"
+
+msgid "FAQs Shows Products Only"
+msgstr "FAQ mostra solo prodotti"
+
+msgid "True / False"
+msgstr "Vero/Falso"
+
+msgid "Exclude FAQ posts from WordPress Search"
+msgstr "Escludi articoli delle FAQ dalla ricerca di WordPress"
+
+msgid "Helpie FAQ Slug"
+msgstr "Slug delle FAQ di Helpie"
+
+msgid "Menu Order"
+msgstr "Ordine del menu"
+
+#. Style Tab
+msgid "Style"
+msgstr "Stile"
+
+msgid "Theme"
+msgstr "Tema"
+
+msgid "Light"
+msgstr "Chiaro"
+
+msgid "Dark"
+msgstr "Scuro"
+
+msgid "Select Theme of FAQ Layout Section"
+msgstr "Seleziona il tema della sezione Layout delle FAQ"
+
+msgid "Custom Styles will overwrite theme styles"
+msgstr "Gli stili personalizzati sovrascriveranno gli stili del tema"
+
+msgid "Toggle Icons"
+msgstr "Icone di attivazione/disattivazione"
+
+msgid "Toggle Icon"
+msgstr "Icona di attivazione/disattivazione"
+
+msgid "Default"
+msgstr "Predefinito"
+
+msgid "Custom"
+msgstr "Personalizzato"
+
+msgid "Toggle Icons are not shown for FAQ List display mode"
+msgstr "Le icone di attivazione/disattivazione non vengono mostrate per la modalità di visualizzazione Lista FAQ"
+
+msgid "Toggle Open"
+msgstr "Attiva per aprire"
+
+msgid "Toggle Off"
+msgstr "Disattiva"
+
+msgid "Icon Color"
+msgstr "Colore dell'icona"
+
+msgid "Icon Position"
+msgstr "Posizione dell'icona"
+
+msgid "Left"
+msgstr "Sinistra"
+
+msgid "FAQ Section - Title"
+msgstr "Sezione FAQ - Titolo"
+
+msgid "Title Styles"
+msgstr "Stili del titolo"
+
+msgid "FAQ Title & Body Styles"
+msgstr "Stili del titolo e del corpo della FAQ"
+
+msgid "FAQ Backgrounds"
+msgstr "Sfondi delle FAQ"
+
+msgid "Title Background"
+msgstr "Sfondo del titolo"
+
+msgid "Body Background"
+msgstr "Sfondo del corpo"
+
+msgid "If you would like to show the FAQs without backgrounds, set the background value as transparent"
+msgstr "Se desideri mostrare le FAQ senza sfondi, imposta il valore dello sfondo come trasparente"
+
+msgid "FAQ Item - Title"
+msgstr "Elemento della FAQ - Titolo"
+
+msgid "FAQ Item - Title Padding"
+msgstr "Elemento della FAQ - Riempimento del titolo"
+
+msgid "FAQ Item - Body"
+msgstr "Elemento della FAQ - Corpo"
+
+msgid "FAQ Item - Body Content Padding"
+msgstr "Elemento della FAQ - Riempimento del contenuto del corpo"
+
+msgid "FAQ Border"
+msgstr "Bordo della FAQ"
+
+msgid "Category FAQ Styles"
+msgstr "Stili della categoria FAQ"
+
+msgid "Category Style are shown only for Simple Accordion with Category or FAQ list display mode"
+msgstr "Lo stile della categoria viene mostrato solo per l'Accordion semplice con la categoria o la modalità di visualizzazione dell'elenco delle FAQ"
+
+msgid "Category Style"
+msgstr "Stile della categoria"
+
+msgid "Search Styles"
+msgstr "Stili di ricerca"
+
+msgid "Search Style are shown only when the search is enabled"
+msgstr "Lo stile di ricerca viene mostrato solo quando la ricerca è abilitata"
+
+msgid "Background Color"
+msgstr "Colore dello sfondo"
+
+msgid "Font Color"
+msgstr "Colore del carattere"
+
+#. User Submission Tab
+msgid "Submission"
+msgstr "Presentazione"
+
+msgid "Enable / Disable User Submission form in FAQ"
+msgstr "Abilita/Disabilita modulo di presentazione dell'utente nella FAQ"
+
+msgid "Ask Question With"
+msgstr "Fai una domanda con"
+
+msgid "On Submission"
+msgstr "Alla presentazione"
+
+msgid "Dont Require Approval"
+msgstr "Non richiedere l'approvazione"
+
+msgid "Require Approval"
+msgstr "Richiedi l'approvazione"
+
+msgid "Approval Before Showing"
+msgstr "Approvazione prima della visualizzazione"
+
+msgid "Once Approved, Submitter will be notified through email"
+msgstr "Una volta approvato, il mittente verrà notificato via email"
+
+msgid "Submitter Notification"
+msgstr "Notifica al mittente"
+
+msgid "Subject"
+msgstr "Oggetto"
+
+msgid "Subject title"
+msgstr "Titolo dell'oggetto"
+
+msgid "The FAQ you submitted has been approved"
+msgstr "La tua FAQ è stata approvata"
+
+msgid "A new FAQ you had submitted has been approved by the admin"
+msgstr "Una nuova FAQ che hai inviato è stata approvata dall'amministratore"
+
+msgid "Notify Admin"
+msgstr "Notifica all'amministratore"
+
+msgid "Admin Mail"
+msgstr "Mail dell'amministratore"
+
+#. Integrations Tab
+msgid "Integrations"
+msgstr "Integrazioni"
+
+#. KB Tab
+msgid "In order use this feature you need to purchase and activate the %s plugin"
+msgstr "Per utilizzare questa funzionalità è necessario acquistare e attivare il plugin %s"
+
+msgid "Enable FAQ in Helpie KB"
+msgstr "Abilita FAQ in Helpie KB"
+
+msgid "Show FAQ in Helpie KB Category Page"
+msgstr "Mostra FAQ nella pagina delle categorie di Helpie KB"
+
+msgid "Where to Show FAQ in Helpie KB Category Page"
+msgstr "Dove mostrare le FAQ nella pagina delle categorie di Helpie KB"
+
+msgid "Content"
+msgstr "Contenuto"
+
+msgid "Before Content"
+msgstr "Prima del contenuto"
+
+msgid "After Content"
+msgstr "Dopo il contenuto"
+
+msgid "Select show faq before or after content in kb category page"
+msgstr "Seleziona mostra faq prima o dopo il contenuto nella pagina delle categorie kb"
+
+#. WooCommerce Tab
+msgid "Show FAQ in WooCommerce"
+msgstr "Mostra FAQ in WooCommerce"
+
+msgid "Show FAQ In WooCommerce product tab"
+msgstr "Mostra FAQ nella scheda del prodotto WooCommerce"
+
+msgid "Show FAQ Search"
+msgstr "Mostra ricerca FAQ"
+
+msgid "Show FAQ Search In WooCommerce product"
+msgstr "Mostra ricerca FAQ nel prodotto WooCommerce"
+
+msgid "Tab Title"
+msgstr "Titolo scheda"
+
+msgid "In your site not found product categories, please add some categories for better customization of Product FAQ Relations"
+msgstr "Nel tuo sito non sono state trovate categorie di prodotti, per favore aggiungi delle categorie per una migliore personalizzazione delle relazioni FAQ sui prodotti"
+
+msgid "Product Faq Relations"
+msgstr "Relazioni FAQ sui prodotti"
+
+msgid "Product FAQ Relations"
+msgstr "Relazioni FAQ sui prodotti"
+
+msgid "Link this Category to"
+msgstr "Collega questa categoria a"
+
+msgid "All Woo Categories"
+msgstr "Tutte le categorie Woo"
+
+msgid "Specific Woo Categories"
+msgstr "Categorie Woo specifiche"
+
+msgid "Product of Woo Commerce Categories"
+msgstr "Prodotti delle categorie di WooCommerce"
+
+#. Elementor Widget
+msgid "Single Item"
+msgstr "Elemento singolo"
+
+msgid "Single Item - Header"
+msgstr "Elemento singolo - Intestazione"
+
+msgid "Single Item - Body"
+msgstr "Elemento singolo - Corpo"
+
+#. Roadmap
+msgid "Roadmap"
+msgstr "Piano di sviluppo"
+
+msgid "here"
+msgstr "qui"
+
+msgid "You can vote on Helpie FAQ's next feature %s"
+msgstr "Puoi votare per la prossima funzionalità di Helpie FAQ %s"
+
+#. Frondend
+msgid "No FAQ found"
+msgstr "Nessuna FAQ trovata"
+
+msgid "Question ? ( required )"
+msgstr "Domanda? (obbligatoria)"
+
+msgid "Your Email ( required )"
+msgstr "La tua email (obbligatoria)"
+
+msgid "Answer"
+msgstr "Rispondi"
+
+msgid "Submit"
+msgstr "Invia"
+
+# PAGINATION
+msgid "Next"
+msgstr "Successivo"
+
+msgid "Previous"
+msgstr "Precedente"
+
+msgid "First"
+msgstr "Primo"
+
+msgid "Last"
+msgstr "Ultimo"

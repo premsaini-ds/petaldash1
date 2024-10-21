@@ -78,11 +78,20 @@ function monsterinsights_admin_menu()
     //  Site Notes
 	add_submenu_page( $hook, __( 'Site Notes:', 'google-analytics-for-wordpress' ), __( 'Site Notes', 'google-analytics-for-wordpress' ), 'monsterinsights_save_settings', $submenu_base . '#/site-notes' );
 
-    //  AI Insights
-    add_submenu_page( $hook, __( 'AI Insights:', 'google-analytics-for-wordpress' ), sprintf(__( '%s AI Insights', 'google-analytics-for-wordpress' ), monsterinsights_get_ai_menu_icon()), 'monsterinsights_save_settings', 'admin.php?page=monsterinsights_reports#/ai-insights' );
+	//  AI Insights
+	// translators: Icon
+	add_submenu_page( $hook, __( 'AI Insights:', 'google-analytics-for-wordpress' ), sprintf( __( '%s AI Insights', 'google-analytics-for-wordpress' ), monsterinsights_get_ai_menu_icon() ), 'monsterinsights_save_settings', 'admin.php?page=monsterinsights_reports#/ai-insights' );
+
+	$license_type = MonsterInsights()->license->get_license_type();
+
+	//  AI Chat
+	if ( ! monsterinsights_is_pro_version() || 'plus' === $license_type ) {
+		// translators: Placeholder adds an svg icon
+		add_submenu_page( $hook, __( 'Conversations AI:', 'google-analytics-for-wordpress' ), sprintf( __( '%s Conversations AI', 'google-analytics-for-wordpress' ), monsterinsights_get_ai_menu_icon() ), 'monsterinsights_save_settings', 'admin.php?page=monsterinsights_reports#/ai-insights/chat' );
+	}
 
 	// Add Popular Posts menu item.
-	add_submenu_page($hook, __('Popular Posts:', 'google-analytics-for-wordpress'), __('Popular Posts', 'google-analytics-for-wordpress'), 'monsterinsights_save_settings', $submenu_base . '#/popular-posts');
+	add_submenu_page( $hook, __( 'Popular Posts:', 'google-analytics-for-wordpress' ), __( 'Popular Posts', 'google-analytics-for-wordpress' ), 'monsterinsights_save_settings', $submenu_base . '#/popular-posts' );
 
 	// Add submenu under `Insights` main menu for user journey report.
 	add_submenu_page( $hook, __( 'User Journey:', 'google-analytics-for-wordpress' ), __( 'User Journey', 'google-analytics-for-wordpress' ), 'monsterinsights_view_dashboard', 'admin.php?page=monsterinsights_reports#/user-journey-report' );
@@ -437,7 +446,11 @@ function monsterinsights_load_admin_partial($template, $data = array())
 function monsterinsights_admin_footer($text)
 {
 	global $current_screen;
-	if (!empty($current_screen->id) && strpos($current_screen->id, 'monsterinsights') !== false) {
+	if (
+		! empty( $current_screen->id )
+		&& strpos( $current_screen->id, 'monsterinsights' ) !== false
+		&& ! monsterinsights_is_pro_version()
+	) {
 		$url = 'https://wordpress.org/support/view/plugin-reviews/google-analytics-for-wordpress?filter=5';
 		// Translators: Placeholders add a link to the wordpress.org repository.
 		$text = sprintf(esc_html__('Please rate %1$sMonsterInsights%2$s on %3$s %4$sWordPress.org%5$s to help us spread the word. Thank you from the MonsterInsights team!', 'google-analytics-for-wordpress'), '<strong>', '</strong>', '<a class="monsterinsights-no-text-decoration" href="' . $url . '" target="_blank" rel="noopener noreferrer"><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i><i class="monstericon-star"></i></a>', '<a href="' . $url . '" target="_blank" rel="noopener noreferrer">', '</a>');

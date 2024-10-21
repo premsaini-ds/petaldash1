@@ -15,10 +15,33 @@
  */
 
 get_header(); ?>
-
+	<?php
+	 		 $post_id = get_the_ID(); // Get current post ID
+            $post = get_post($post_id); // Fetch the post object by ID
+	?>
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main">
+			<div class="container blog_page_title container mt-4 mb-4 text-center">
+  		 		 <div class="row">
+  		 		 		<div class="page-title">
+    <h2 class="text-center single_post_title"><?php single_post_title(); ?></h2>
 
+   <p class="text-center single_post_content">
+        <?php 
+            // Get the blog page ID, assuming this is a page used to list blogs
+            $page_id = get_queried_object_id(); // Get the current page ID (Blog page)
+            $page_content = get_post($page_id); // Fetch the page object using the ID
+            
+            // Display the content of the page (Blog Page description)
+            echo $page_content->post_content; 
+        ?>
+    </p>
+</div>
+
+  		 		 </div>
+  		 	</div>
+			<div class="container">
+  		  <div class="row">
 		<?php if ( have_posts() ) : ?>
 
 			<?php if ( is_home() && ! is_front_page() ) : ?>
@@ -59,7 +82,8 @@ get_header(); ?>
 
 		endif;
 		?>
-
+   </div><!-- .row -->
+</div><!-- .container -->
 		</main><!-- .site-main -->
 	</div><!-- .content-area -->
 
