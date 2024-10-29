@@ -23,11 +23,47 @@ global $product;
 if ( empty( $product ) || ! $product->is_visible() || $product->is_type('gift-card')) {
 	return;
 }
+
+
+
 ?>
 
  <li <?php wc_product_class('', $product); ?>>
+
+ <?php // Get the product permalink
+
+// Get the product permalink
+$product_permalink = esc_url(get_permalink($product->get_id()));
+
+// Get the postcode and delivery date from the request, defaulting to empty strings if not set
+$postcode = isset($_REQUEST['postcode']) && !empty($_REQUEST['postcode']) ? urlencode($_REQUEST['postcode']) : '';
+$delivery_date = isset($_REQUEST['delivery_date']) && !empty($_REQUEST['delivery_date']) ? urlencode($_REQUEST['delivery_date']) : '';
+
+// Construct the query parameters
+$query_params = '?postcode=' . $postcode . '&delivery_date=' . $delivery_date;
+
+// Ensure that both parameters are present in the URL
+$query_params = '?postcode=' . ($postcode ?: '') . '&delivery_date=' . ($delivery_date ?: '');
+
+// Output the final URL
+$final_url = $product_permalink . $query_params;
+
+
+?>
     <div class="card text-center">
-        <a href="#" class="product-hover" data-bs-toggle="modal" data-bs-target="#productModal-<?php echo $product->get_id(); ?>">
+            <a href="<?php 
+            if (!isset($_REQUEST['postcode']) && !isset($_REQUEST['delivery_date']) && empty($_REQUEST['postcode'])) { 
+                echo '#'; 
+            } else { 
+                echo $final_url;
+            }
+        ?>" 
+        class="product-hover"
+        <?php 
+            if (!isset($_REQUEST['postcode']) && !isset($_REQUEST['delivery_date']) && empty($_REQUEST['postcode'])) { 
+                echo 'data-bs-toggle="modal" data-bs-target="#productModal-' . esc_attr($product->get_id()) . '"';
+            } 
+        ?>>
             <?php
             // Get product images
             $attachment_ids = $product->get_gallery_image_ids();
@@ -57,6 +93,7 @@ if ( empty( $product ) || ! $product->is_visible() || $product->is_type('gift-ca
             <p class="card-text"><strong><?php echo $product->get_price_html(); ?></strong></p>
         </div>
     </div>
+    <?php if(!isset($_REQUEST['postcode']) && !isset($_REQUEST['delivery_date']) && empty($_REQUEST['postcode']))  { ?>
 
     <!-- Bootstrap Modal -->
     <div class="modal fade" id="productModal-<?php echo $product->get_id(); ?>" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
@@ -158,7 +195,7 @@ jQuery(document).ready(function($) {
     });
 });
 </script>
-
+<?php } ?>
 
 </li>
 

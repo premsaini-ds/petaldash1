@@ -1,7 +1,7 @@
 # WordPress Core
 /wp-admin/
 /wp-includes/
-/wp-content/plugins
+/wp-content/plugins/
 # Local files
 wp-config.php
 *.log

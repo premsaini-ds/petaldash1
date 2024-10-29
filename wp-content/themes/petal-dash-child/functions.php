@@ -538,71 +538,76 @@ function filter_products_by_postcode_and_delivery_days($query) {
     if (!is_admin() && $query->is_main_query() && is_shop() || is_product_category()) {
 
                    // Filter by postcode
-            if (isset($_GET['postcode']) && !empty($_GET['postcode'])) {
-                $postcode = sanitize_text_field($_GET['postcode']);
-                
-                // Create the meta query to search for the postcode within the stored postcodes
-                $meta_query = array(
-                    array(
-                        'key'     => 'product_postcode',  // The custom field where postcodes are stored
-                        'value'   => $postcode, // Match the exact postcode
-                        'compare' => 'LIKE',               // Partial match to find the postcode in the list
-                    ),
-                    // To match the postcode at the start or end of the string or in between
-                    'relation' => 'OR',                   // Use OR to cover different cases
-                    array(
-                        'key'     => 'product_postcode',
-                        'value'   => $postcode . ',',     // Match if it's the first postcode in the string
-                        'compare' => 'LIKE',
-                    ),
-                    array(
-                        'key'     => 'product_postcode',
-                        'value'   => ',' . $postcode,      // Match if it's the last postcode in the string
-                        'compare' => 'LIKE',
-                    ),
-                );
+           // Initialize meta query array
+            // Initialize meta query array
+                $meta_query = array('relation' => 'OR'); // Start with an OR relation
 
-                $query->set('meta_query', $meta_query);
-            }
+                // Filter by postcode
+                if (isset($_GET['postcode']) && !empty($_GET['postcode'])) {
+                    $postcode = sanitize_text_field($_GET['postcode']);
+                    
+                    // Create the postcode meta query
+                    $postcode_conditions = array(
+                        'relation' => 'OR', // Use OR for postcode conditions
+                        array(
+                            'key'     => 'product_postcode',  // The custom field where postcodes are stored
+                            'value'   => $postcode,            // Match the exact postcode
+                            'compare' => '=',                   // Exact match for the postcode
+                        ),
+                        array(
+                            'key'     => 'product_postcode',
+                            'value'   => $postcode . ',',      // Match if it's the first postcode in the string
+                            'compare' => '=',                   // Exact match for the first postcode
+                        ),
+                        array(
+                            'key'     => 'product_postcode',
+                            'value'   => ',' . $postcode,       // Match if it's the last postcode in the string
+                            'compare' => '=',                   // Exact match for the last postcode
+                        ),
+                    );
 
+                    // Add postcode conditions to the meta query
+                    $meta_query[] = $postcode_conditions; 
+                }
 
+                // Filter by delivery date
+                if (isset($_GET['delivery_date']) && !empty($_GET['delivery_date']) && $_GET['delivery_date'] != 'anytime') {
+                    // Sanitize and get the delivery date from the query parameter
+                    $delivery_date = sanitize_text_field($_GET['delivery_date']);
 
+                    // Create a DateTime object for the delivery date
+                    $deliveryDate = new DateTime($delivery_date);
+                    $deliveryDate->setTime(0, 0, 0); // Set time to midnight
 
-        // Filter by delivery date
+                    // Create a DateTime object for the current date
+                    $currentDate = new DateTime();
+                    $currentDate->setTime(0, 0, 0); // Set time to midnight
 
-        if (isset($_GET['delivery_date']) && !empty($_GET['delivery_date']) && $_GET['delivery_date'] !='anytime') {
+                    // Calculate the difference
+                    $interval = $currentDate->diff($deliveryDate);
 
-          // Sanitize and get the delivery date from the query parameter
-                $delivery_date = sanitize_text_field($_GET['delivery_date']);
+                    // Get the number of days
+                    $daysBetween = $interval->days + 1; // Get total days between dates
 
-                // Create a DateTime object for the delivery date
-                $deliveryDate = new DateTime($delivery_date);
-                $deliveryDate->setTime(0, 0, 0); // Set time to midnight
+                    // Create the delivery date meta query
+                    $delivery_conditions = array(
+                        array(
+                            'key'     => 'delivery_days',
+                            'value'   => $daysBetween,
+                            'compare' => '=',                   // Exact match for the delivery days
+                        ),
+                    );
 
-                // Create a DateTime object for the current date
-                $currentDate = new DateTime();
-                $currentDate->setTime(0, 0, 0); // Set time to midnight
+                    // Add delivery date conditions to the meta query
+                    $meta_query[] = $delivery_conditions;
+                }
 
-                // Calculate the difference
-                $interval = $currentDate->diff($deliveryDate);
+                // Set the meta query to the main query
+                if (count($meta_query) > 0) {
+                    // If both conditions exist, add them as separate conditions
+                    $query->set('meta_query', $meta_query);
+                }
 
-                // Get the number of days
-                $daysBetween = $interval->days+1; // Get total days between dates
-
-                
-
-                // echo $daysBetween;die;
-
-            $delivery_meta_query = array(
-                array(
-                    'key'     => 'delivery_days',
-                    'value'   => $daysBetween,
-                    'compare' => 'LIKE',
-                ),
-            );
-
-            $query->set('meta_query', $delivery_meta_query);
-        }
       
     }
 }
@@ -624,7 +629,13 @@ add_action('wp', 'capture_delivery_days');
 /* Filter sidebar */
 function postcode_delivery_filter_form() {
     ob_start(); ?>
-    <form id="postcode-filter" method="GET">
+      <form id="postcode-filter" method="GET">
+
+      <?php if(isset($_REQUEST['delivery_date'])){  ?>
+            
+            <input type="hidden" value="<?php echo $_REQUEST['delivery_date']; ?>" name="delivery_date">
+            
+          <?php  } ?>
     <h3 class="widget-title">Delivering to</h3>
         <div class="woocommerce-widget-layered-nav">
            <i class="fa fa-home" aria-hidden="true"></i>
@@ -638,6 +649,13 @@ function postcode_delivery_filter_form() {
         <div class="woocommerce-widget-layered-nav arcive-sidebar-lay">
         <i class="fa fa-calendar" aria-hidden="true"></i>
 
+        <?php if(isset($_REQUEST['postcode'])){  ?>
+            
+        <input type="hidden" value="<?php echo $_REQUEST['postcode']; ?>" name="postcode">
+        
+      <?php  } ?>
+        
+       
             <select id="delivery_date" name="delivery_date">
                 <option value="" selected="">Select a delivery date</option>
                 <?php
